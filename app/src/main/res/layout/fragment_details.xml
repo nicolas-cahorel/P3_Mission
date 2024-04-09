@@ -44,7 +44,7 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
-            tools:text="Restaurant Indien" />
+            android:text="@string/restaurant_type" />
 
         <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
@@ -99,22 +99,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantName"
             tools:text="4.0" />
+            <!-- android:text="4.0" -->
 
         <RatingBar
             android:id="@+id/rbRestaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="-15dp"
+            android:layout_marginStart="0dp"
+            android:scaleX="0.25"
+            android:scaleY="0.25"
             android:backgroundTint="@color/greyRating"
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="@color/yellowRating"
             android:rating="4"
-            android:scaleX="0.35"
-            android:scaleY="0.35"
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantRate"
             app:layout_constraintStart_toStartOf="@id/tvRestaurantRate"
-            app:layout_constraintTop_toBottomOf="@id/tvRestaurantName" />
+            app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate" />
 
         <TextView
             android:id="@+id/tvRestaurantTotalRatings"
@@ -128,79 +130,80 @@
             app:layout_constraintStart_toStartOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate"
             tools:text="(257)" />
+            <!-- android:text="(257)" -->
 
         <ProgressBar
             android:id="@+id/pbRateValue5"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="@color/greyRating"
             android:progress="100"
             android:progressTint="@color/yellowRating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toTopOf="@id/tvRestaurantRate" />
 
         <ProgressBar
             android:id="@+id/pbRateValue4"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="@color/greyRating"
             android:progress="75"
             android:progressTint="@color/yellowRating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/pbRateValue5" />
 
         <ProgressBar
             android:id="@+id/pbRateValue3"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="@color/greyRating"
             android:progress="50"
             android:progressTint="@color/yellowRating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/pbRateValue4" />
 
         <ProgressBar
             android:id="@+id/pbRateValue2"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="@color/greyRating"
             android:progress="25"
             android:progressTint="@color/yellowRating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/pbRateValue3" />
 
         <ProgressBar
             android:id="@+id/pbRateValue1"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="@color/greyRating"
             android:progress="40"
             android:progressTint="@color/yellowRating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/pbRateValue2" />
 
         <TextView
-            android:id="@+id/buttonLeaveComment"
+            android:id="@+id/buttonLeaveReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -209,12 +212,11 @@
             android:textColor="@color/grey"
             android:textSize="12sp"
             android:textStyle="bold"
-
             android:typeface="sans"
             app:layout_constraintEnd_toEndOf="@id/pbRateValue1"
             app:layout_constraintTop_toTopOf="@+id/tvRestaurantTotalRatings"
             app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantTotalRatings"
-            tools:text="Laisser un avis" />
+            android:text="@string/leave_review" />
 
         <!-- Fin modification : ajout d'éléments à la GUI -->
         <View
