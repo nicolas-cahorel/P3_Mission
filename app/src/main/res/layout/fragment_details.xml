@@ -106,7 +106,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-15dp"
-            android:layout_marginStart="0dp"
             android:scaleX="0.25"
             android:scaleY="0.25"
             android:backgroundTint="@color/greyRating"
@@ -114,8 +113,8 @@
             android:numStars="5"
             android:progressTint="@color/yellowRating"
             android:rating="4"
-            app:layout_constraintEnd_toEndOf="@id/tvRestaurantRate"
-            app:layout_constraintStart_toStartOf="@id/tvRestaurantRate"
+            app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
+            app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate" />
 
         <TextView
