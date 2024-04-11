@@ -40,11 +40,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/jakarta_regular"
+            android:text="@string/restaurant_type"
             android:textColor="@color/grey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
-            android:text="@string/restaurant_type" />
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
         <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
@@ -99,20 +99,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantName"
             tools:text="4.0" />
-            <!-- android:text="4.0" -->
+        <!-- android:text="4.0" -->
 
         <RatingBar
             android:id="@+id/rbRestaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-15dp"
-            android:scaleX="0.25"
-            android:scaleY="0.25"
+            android:layout_marginTop="5dp"
             android:backgroundTint="@color/greyRating"
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="@color/yellowRating"
             android:rating="4"
+            style="?android:attr/ratingBarStyleSmall"
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
             app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate" />
@@ -129,7 +128,7 @@
             app:layout_constraintStart_toStartOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate"
             tools:text="(257)" />
-            <!-- android:text="(257)" -->
+        <!-- android:text="(257)" -->
 
         <ProgressBar
             android:id="@+id/pbRateValue5"
@@ -208,14 +207,14 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/jakarta_regular"
+            android:text="@string/leave_review"
             android:textColor="@color/grey"
             android:textSize="12sp"
             android:textStyle="bold"
             android:typeface="sans"
-            app:layout_constraintEnd_toEndOf="@id/pbRateValue1"
-            app:layout_constraintTop_toTopOf="@+id/tvRestaurantTotalRatings"
             app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantTotalRatings"
-            android:text="@string/leave_review" />
+            app:layout_constraintEnd_toEndOf="@id/pbRateValue1"
+            app:layout_constraintTop_toTopOf="@+id/tvRestaurantTotalRatings" />
 
         <!-- Fin modification : ajout d'éléments à la GUI -->
         <View

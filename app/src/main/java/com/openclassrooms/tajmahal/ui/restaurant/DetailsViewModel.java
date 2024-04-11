@@ -3,15 +3,20 @@ package com.openclassrooms.tajmahal.ui.restaurant;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
+import com.openclassrooms.tajmahal.data.repository.ReviewRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.Review;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
-
-import java.util.Calendar;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
@@ -19,22 +24,25 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
  * MainViewModel is responsible for preparing and managing the data for the {@link DetailsFragment}.
  * It communicates with the {@link RestaurantRepository} to fetch restaurant details and provides
  * utility methods related to the restaurant UI.
- *
+ * <p>
  * This ViewModel is integrated with Hilt for dependency injection.
  */
 @HiltViewModel
 public class DetailsViewModel extends ViewModel {
 
     private final RestaurantRepository restaurantRepository;
+    private final ReviewRepository reviewRepository;
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
      *
      * @param restaurantRepository The repository which will provide restaurant data.
+     * @param reviewRepository     The repository which will provide review data.
      */
     @Inject
-    public DetailsViewModel(RestaurantRepository restaurantRepository) {
+    public DetailsViewModel(RestaurantRepository restaurantRepository, ReviewRepository reviewRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     /**
@@ -45,6 +53,12 @@ public class DetailsViewModel extends ViewModel {
     public LiveData<Restaurant> getTajMahalRestaurant() {
         return restaurantRepository.getRestaurant();
     }
+
+
+    /**
+     * Fetches the list of details of the reviews that can be modified.
+     */
+    MutableLiveData<List<Review>> currentReview = new MutableLiveData<List<Review>>();
 
     /**
      * Retrieves the current day of the week in French.
@@ -84,4 +98,39 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
+
+    public LiveData<List<Integer>> getStarsCount() {
+        return reviewRepository.getReviews();
+        // traiter les reviews pour  créer les nouvelles données
+    }
+    /**
+     * Initialization of a MutableLiveData array to store the number of reviews for each star rating.
+     *     MutableLiveData<int[]> starsCount = new MutableLiveData<>(new int[6]);
+     */
+
+
+    /**
+     * Initialization of a MutableLiveData float to store the average rating of all reviews.
+     */
+    MutableLiveData<Float> averageRating = new MutableLiveData<>();
+
+    /**
+     * Initialization of a MutableLiveData boolean to indicate whether the last review has been reached.
+     */
+    MutableLiveData<Boolean> isLastReview = new MutableLiveData<>(false);
+
+
+public void startDetails() {
+    starsCount = reviewRepository.getReview()
 }
+
+
+
+}
+
+
+// MAJ de la valeur contenue dans le LiveData
+// currentReview.postValue(reviews.get(1));
+
+// Lecture du contenu du LiveData
+// currentReview.getValue();

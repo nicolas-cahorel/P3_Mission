@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="45dp"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/button_back"
+            android:focusable="true"
+            android:scaleX="-2"
+            android:scaleY="2"
+            android:src="@drawable/baseline_arrow_forward_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/tvRestaurantName123"
+            android:layout_width="86dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jakarta_bold"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
+            app:layout_constraintStart_toEndOf="@id/buttonBack"
+            app:layout_constraintTop_toTopOf="@id/buttonBack"
+            tools:text="Taj Mahal" />
+
+        <ImageView
+            android:id="@+id/ivNewReviewAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/ivNewReviewAvatar"
+            android:src="@drawable/logo"
+            app:layout_constraintStart_toStartOf="@id/buttonBack"
+            app:layout_constraintTop_toBottomOf="@id/buttonBack"
+            app:tint="@color/black" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

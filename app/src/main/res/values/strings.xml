@@ -23,8 +23,8 @@
     <string name="phone_icon">Phone icon</string>
     <string name="leave_review">Leave a review</string>
     <string name="restaurant_type">Indian restaurant</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_back">Back to restaurant details</string>
+    <string name="ivNewReviewAvatar">New review author\'s avatar</string>
 
 
 </resources>
