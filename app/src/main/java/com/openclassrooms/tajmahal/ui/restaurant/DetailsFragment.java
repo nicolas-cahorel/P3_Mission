@@ -4,22 +4,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
-import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class DetailsFragment extends Fragment {
      * It's used to perform one-time initialization.
      *
      * @param savedInstanceState A bundle containing previously saved instance state.
-     * If the fragment is being re-created from a previous saved state, this is the state.
+     *                           If the fragment is being re-created from a previous saved state, this is the state.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,9 +54,9 @@ public class DetailsFragment extends Fragment {
      * This method is called immediately after `onCreateView()`.
      * Use this method to perform final initialization once the fragment views have been inflated.
      *
-     * @param view The View returned by `onCreateView()`.
+     * @param view               The View returned by `onCreateView()`.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     *                           from a previous saved state as given here.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -66,17 +64,18 @@ public class DetailsFragment extends Fragment {
         setupUI(); // Sets up user interface components.
         setupViewModel(); // Prepares the ViewModel for the fragment.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
-        detailsViewModel.getStarsCount().observe(requireActivity(), this::updateUIWithStarsCount); // Observes changes in the restaurant data and updates the UI accordingly.
+        detailsViewModel.getTajMahalStarsCount().observe(requireActivity(), this::updateUIWithStarsCount); // Observes changes in starsCount and updates the UI accordingly.
+        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
     }
 
     /**
      * Creates and returns the view hierarchy associated with the fragment.
      *
-     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
-     * The fragment should not add the view itself but return it.
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     *                           The fragment should not add the view itself but return it.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     *                           from a previous saved state as given here.
      * @return Returns the View for the fragment's UI, or null.
      */
     @Override
@@ -128,11 +127,21 @@ public class DetailsFragment extends Fragment {
     }
 
 
+
+    // Mettez à jour votre UI avec les nouvelles valeurs de starsCount
     private void updateUIWithStarsCount(List<Integer> starsCount) {
-        // a remplir
+        binding.pbRateValue5.setProgress(starsCount.get(4));
+        binding.pbRateValue4.setProgress(starsCount.get(3));
+        binding.pbRateValue3.setProgress(starsCount.get(2));
+        binding.pbRateValue2.setProgress(starsCount.get(1));
+        binding.pbRateValue1.setProgress(starsCount.get(0));
     }
 
-
+    // Mettez à jour votre UI avec la nouvelle valeur de averageRating
+    private void updateUIWithAverageRating(Float averageRating) {
+        //binding.tvRestaurantRate.setText();
+        //binding.rbRestaurant.setRating();
+    }
 
     /**
      * Opens the provided address in Google Maps or shows an error if Google Maps
