@@ -51,18 +51,5 @@ public class RestaurantRepository {
     public LiveData<Restaurant> getRestaurant() {
         return new MutableLiveData<>(restaurantApi.getRestaurant());
     }
-
-    public MutableLiveData<List<Review>> getReviews() {
-        return new MutableLiveData<List<Review>>(restaurantApi.getReviews());
-    }
 }
-
-/**
- * @return public LiveData<List<Review>> getStarsCount() {
- * return new MutableLiveData<>(restaurantApi.getStarsCount());
- * }
- * public LiveData<List<Review>> getAverageRating() {
- * return new MutableLiveData<>(restaurantApi.getAverageRating());
- * }
- */
 

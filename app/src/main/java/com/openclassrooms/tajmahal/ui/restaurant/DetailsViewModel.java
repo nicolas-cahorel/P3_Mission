@@ -10,8 +10,11 @@ import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.data.repository.ReviewRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.Review;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,22 +55,68 @@ public class DetailsViewModel extends ViewModel {
         return restaurantRepository.getRestaurant();
     }
 
-
-
     /**
-     * Fetches the list of details of the reviews that can be modified.
+     * Fetches the details of the Taj Mahal total ratings.
+     *
+     * @return LiveData object containing the details of the Taj Mahal total ratings.
      */
+    public MutableLiveData<Integer> getTajMahalTotalRatings() {
+        MutableLiveData<Integer> totalRatingsLiveData = new MutableLiveData<>();
+        List<Review> reviews = reviewRepository.getReviews().getValue();
+        int totalRatings = 0;
+        if (reviews != null) {
+            totalRatings += reviews.size();
+        }
+        totalRatingsLiveData.setValue(totalRatings);
+        return totalRatingsLiveData;
+    }
+
     /**
-    public LiveData<List<Review>> getReviews() {
-        return reviewRepository.getReviews();
+     * Fetches the details of the Taj Mahal rating.
+     *
+     * @return LiveData object containing the details of the Taj Mahal rating.
+     */
+    public MutableLiveData<List<Integer>> getTajMahalRatingCount() {
+        MutableLiveData<List<Integer>> ratingCountLiveData = new MutableLiveData<>();
+        List<Review> reviews = reviewRepository.getReviews().getValue();
+        List<Integer> ratingCount = new ArrayList<>(Collections.nCopies(5, 0));
+        Integer totalRatings = getTajMahalTotalRatings().getValue();
+        if (reviews != null) {
+            for (Review review : reviews) {
+                int rating = review.getRating();
+                // ici la note doit être comprise en 1 et 5 étoiles, impossible de mettre 0
+                if (rating >= 1 && rating <= 5) {
+                    ratingCount.set(rating - 1, ratingCount.get(rating - 1) + 1);
+                }
+            }
+        }
+        for (int i = 0; i < ratingCount.size(); i++) {
+            if (ratingCount.get(i) != 0 && totalRatings != null) {
+                ratingCount.set(i, Math.round((float) ratingCount.get(i) / totalRatings * 100));
+            }
+        }
+        ratingCountLiveData.setValue(ratingCount);
+        return ratingCountLiveData;
     }
-    public LiveData<List<Integer>> getStarsCount() {
-        return reviewRepository.getStarsCount();
+
+    /**
+     * Fetches the details of the Taj Mahal average rating.
+     *
+     * @return LiveData object containing the details of the Taj Mahal average rating.
+     */
+    public MutableLiveData<Float> getTajMahalAverageRating() {
+        MutableLiveData<Float> averageRatingLiveData = new MutableLiveData<>();
+        List<Integer> ratingCount = getTajMahalRatingCount().getValue();
+        float averageRating = 0;
+        if (ratingCount != null) {
+            for (int i = 0; i < ratingCount.size(); i++) {
+                averageRating += (float) (i + 1) * ratingCount.get(i);
+            }
+            averageRating = (float) Math.round(averageRating / 100 * 10) / 10;
+            averageRatingLiveData.setValue(averageRating);
+        }
+        return averageRatingLiveData;
     }
-    public LiveData<float> getAverageRating() {
-        return reviewRepository.getAverageRating();
-    }
-  */
 
 
     /**
@@ -107,86 +156,4 @@ public class DetailsViewModel extends ViewModel {
         }
         return dayString;
     }
-    // starsCount contient une liste avec le nombre de review par étoiles
-    MutableLiveData<List<Integer>> starsCount = new MutableLiveData<List<Integer>>();
-
-    // averageRating contient le nombre moyen d'étoile arrondi au dixieme
-    MutableLiveData<Float> averageRating = new MutableLiveData<Float>();
-
-
-
-    public List<Integer> getTajMahalStarsCount(){
-        // extraire les données de reviews et retourner les valeurs voulues
-    }
-    public Float getTajMahalAverageRating(){
-
-    }
-
-
-    /**
-    public int getStarsCount() {
-        List<Integer> StarsCount = null;
-        return StarsCount;
-    }
-    
-
-    public static class StarsCount {
-        public StarsCount getStarsCount() {
-            List<Review> reviews = reviewRepository.getReviews().getValue();
-            List<Integer> starsCount = new ArrayList<>(Collections.nCopies(6, 0));
-            if (reviews != null) {
-                for (Review review : reviews) {
-                    int rating = review.getRating();
-                    if (rating >= 1 && rating <= 5) {
-                        starsCount.set(rating - 1, starsCount.get(rating - 1) + 1);
-                    }
-                }
-            }
-
-            int totalRatings = 0;
-            float totalWeight = 0;
-            for (int i = 0; i < starsCount.size(); i++) {
-                totalRatings += (i + 1) * starsCount.get(i);
-                totalWeight += starsCount.get(i);
-            }
-
-            float averageRating;
-            if (totalWeight == 0) {
-                averageRating = 0;
-            } else {
-                averageRating = (float) totalRatings / totalWeight;
-                averageRating = (float) Math.round(averageRating * 10) /10;
-
-            }
-
-            MutableLiveData<List<Integer>> starsCountLiveData = new MutableLiveData<>();
-            starsCountLiveData.setValue(starsCount);
-
-            MutableLiveData<Float> averageRatingLiveData = new MutableLiveData<>();
-            averageRatingLiveData.setValue(averageRating);
-
-        }
-
-    }
-    public static class AverageRating {
-
-    }
-     */
-
-
-
-
-    /**
-     * Initialization of a MutableLiveData array to store the number of reviews for each star rating.
-     *     MutableLiveData<int[]> starsCount = new MutableLiveData<>(new int[6]);
-     */
-
-
 }
-
-
-// MAJ de la valeur contenue dans le LiveData
-// currentReview.postValue(reviews.get(1));
-
-// Lecture du contenu du LiveData
-// currentReview.getValue();

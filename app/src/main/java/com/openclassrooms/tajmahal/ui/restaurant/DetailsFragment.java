@@ -20,6 +20,7 @@ import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 
 import java.util.List;
+import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -64,7 +65,8 @@ public class DetailsFragment extends Fragment {
         setupUI(); // Sets up user interface components.
         setupViewModel(); // Prepares the ViewModel for the fragment.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
-        detailsViewModel.getTajMahalStarsCount().observe(requireActivity(), this::updateUIWithStarsCount); // Observes changes in starsCount and updates the UI accordingly.
+        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings); // Observes changes in totalRatings and updates the UI accordingly.
+        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount); // Observes changes in ratingCount and updates the UI accordingly.
         detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
     }
 
@@ -126,22 +128,38 @@ public class DetailsFragment extends Fragment {
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
     }
 
-
-
-    // Mettez à jour votre UI avec les nouvelles valeurs de starsCount
-    private void updateUIWithStarsCount(List<Integer> starsCount) {
-        binding.pbRateValue5.setProgress(starsCount.get(4));
-        binding.pbRateValue4.setProgress(starsCount.get(3));
-        binding.pbRateValue3.setProgress(starsCount.get(2));
-        binding.pbRateValue2.setProgress(starsCount.get(1));
-        binding.pbRateValue1.setProgress(starsCount.get(0));
+    /**
+     * Updates the UI components with the provided starsCount data.
+     *
+     * @param totalRatings The totalRatings object containing details to be displayed.
+     */
+    private void updateUIWithTotalRatings(Integer totalRatings) {
+        binding.tvRestaurantTotalRatings.setText(String.valueOf(totalRatings));
     }
 
-    // Mettez à jour votre UI avec la nouvelle valeur de averageRating
+    /**
+     * Updates the UI components with the provided starsCount data.
+     *
+     * @param ratingCount The ratingCount object containing details to be displayed.
+     */
+    private void updateUIWithRatingCount(List<Integer> ratingCount) {
+        binding.pbRateValue5.setProgress(ratingCount.get(4));
+        binding.pbRateValue4.setProgress(ratingCount.get(3));
+        binding.pbRateValue3.setProgress(ratingCount.get(2));
+        binding.pbRateValue2.setProgress(ratingCount.get(1));
+        binding.pbRateValue1.setProgress(ratingCount.get(0));
+    }
+
+    /**
+     * Updates the UI components with the provided averageRating data.
+     *
+     * @param averageRating The averageRating object containing details to be displayed.
+     */
     private void updateUIWithAverageRating(Float averageRating) {
-        //binding.tvRestaurantRate.setText();
-        //binding.rbRestaurant.setRating();
+        binding.tvRestaurantRate.setText(String.format(Locale.getDefault(), "%.1f", averageRating));
+        binding.rbRestaurant.setRating(averageRating);
     }
+
 
     /**
      * Opens the provided address in Google Maps or shows an error if Google Maps

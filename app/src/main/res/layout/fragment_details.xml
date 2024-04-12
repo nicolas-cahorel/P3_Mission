@@ -99,10 +99,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantName"
             tools:text="4.0" />
-        <!-- android:text="4.0" -->
 
         <RatingBar
             android:id="@+id/rbRestaurant"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -111,7 +111,6 @@
             android:numStars="5"
             android:progressTint="@color/yellowRating"
             android:rating="4"
-            style="?android:attr/ratingBarStyleSmall"
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
             app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate" />
@@ -128,7 +127,6 @@
             app:layout_constraintStart_toStartOf="@id/tvRestaurantRate"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate"
             tools:text="(257)" />
-        <!-- android:text="(257)" -->
 
         <ProgressBar
             android:id="@+id/pbRateValue5"
