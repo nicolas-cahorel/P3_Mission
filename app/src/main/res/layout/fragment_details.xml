@@ -85,7 +85,7 @@
 
         </com.google.android.material.chip.ChipGroup>
 
-        <!-- Debut modification : ajout d'éléments à la GUI -->
+        <!-- Start of modification: addition of elements to the GUI -->
         <TextView
             android:id="@+id/tvRestaurantRate"
             android:layout_width="wrap_content"
@@ -110,7 +110,8 @@
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="@color/yellowRating"
-            android:rating="4"
+            android:rating="3.5"
+            android:stepSize="0.5"
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
             app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@id/tvRestaurantRate" />
@@ -214,7 +215,7 @@
             app:layout_constraintEnd_toEndOf="@id/pbRateValue1"
             app:layout_constraintTop_toTopOf="@+id/tvRestaurantTotalRatings" />
 
-        <!-- Fin modification : ajout d'éléments à la GUI -->
+        <!-- End of modification: addition of elements to the GUI -->
         <View
             android:id="@+id/separator"
             android:layout_width="0dp"

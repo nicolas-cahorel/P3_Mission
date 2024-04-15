@@ -64,8 +64,9 @@ public class DetailsViewModel extends ViewModel {
         MutableLiveData<Integer> totalRatingsLiveData = new MutableLiveData<>();
         List<Review> reviews = reviewRepository.getReviews().getValue();
         int totalRatings = 0;
+        // The total number of reviews is retrieved
         if (reviews != null) {
-            totalRatings += reviews.size();
+            totalRatings = reviews.size();
         }
         totalRatingsLiveData.setValue(totalRatings);
         return totalRatingsLiveData;
@@ -81,16 +82,20 @@ public class DetailsViewModel extends ViewModel {
         List<Review> reviews = reviewRepository.getReviews().getValue();
         List<Integer> ratingCount = new ArrayList<>(Collections.nCopies(5, 0));
         Integer totalRatings = getTajMahalTotalRatings().getValue();
+
         if (reviews != null) {
+            // The list is iterated through
             for (Review review : reviews) {
                 int rating = review.getRating();
-                // ici la note doit être comprise en 1 et 5 étoiles, impossible de mettre 0
+                // For ratings between 1 and 5 stars, the corresponding counter is increased by 1
                 if (rating >= 1 && rating <= 5) {
                     ratingCount.set(rating - 1, ratingCount.get(rating - 1) + 1);
                 }
             }
         }
+        // The list is iterated through
         for (int i = 0; i < ratingCount.size(); i++) {
+            // The value is converted to a percentage for display purposes in the progress bars
             if (ratingCount.get(i) != 0 && totalRatings != null) {
                 ratingCount.set(i, Math.round((float) ratingCount.get(i) / totalRatings * 100));
             }
@@ -108,10 +113,12 @@ public class DetailsViewModel extends ViewModel {
         MutableLiveData<Float> averageRatingLiveData = new MutableLiveData<>();
         List<Integer> ratingCount = getTajMahalRatingCount().getValue();
         float averageRating = 0;
+        // The list is iterated through
         if (ratingCount != null) {
             for (int i = 0; i < ratingCount.size(); i++) {
                 averageRating += (float) (i + 1) * ratingCount.get(i);
             }
+            // Calculation of the weighted average of the reviews
             averageRating = (float) Math.round(averageRating / 100 * 10) / 10;
             averageRatingLiveData.setValue(averageRating);
         }

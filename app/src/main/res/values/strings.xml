@@ -24,7 +24,11 @@
     <string name="leave_review">Leave a review</string>
     <string name="restaurant_type">Indian restaurant</string>
     <string name="button_back">Back to restaurant details</string>
-    <string name="ivNewReviewAvatar">New review author\'s avatar</string>
+    <string name="ivReviewersAvatar">New review author\'s avatar</string>
+    <string name="tietReviewersComentHint">Share the details of your experience</string>
+    <string name="button_validate">Submit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
