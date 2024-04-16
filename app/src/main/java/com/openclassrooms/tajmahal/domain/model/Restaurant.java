@@ -31,6 +31,7 @@ public class Restaurant {
     private boolean dineIn;
     private boolean takeAway;
 
+
     /**
      * Constructor for the Restaurant class.
      *

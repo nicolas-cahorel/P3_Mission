@@ -13,11 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.List;
 import java.util.Locale;
@@ -126,6 +129,25 @@ public class DetailsFragment extends Fragment {
         binding.buttonAdress.setOnClickListener(v -> openMap(restaurant.getAddress()));
         binding.buttonPhone.setOnClickListener(v -> dialPhoneNumber(restaurant.getPhoneNumber()));
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
+
+        // New features
+        binding.buttonLeaveReview.setEnabled(true);
+        binding.buttonLeaveReview.setOnClickListener(new View.OnClickListener() {
+
+            /** A MODIFIER
+             * Updates the UI components with the provided starsCount data.
+             *
+             * @param totalRatings The totalRatings object containing details to be displayed.
+             */
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ReviewFragment reviewFragment = new ReviewFragment();
+                fragmentTransaction.replace(R.id.container, reviewFragment);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     /**
