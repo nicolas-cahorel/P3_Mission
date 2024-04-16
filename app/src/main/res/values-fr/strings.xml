@@ -27,6 +27,9 @@
     <string name="ivReviewersAvatar">Photo de profil de l\'auteur du nouvel avis</string>
     <string name="tietReviewersComentHint">Partagez ici les détails de votre expérience</string>
     <string name="button_validate">Valider</string>
+    <string name="button_validate_add_coment_rate">Ajouter note et commentaire</string>
+    <string name="button_validate_add_coment">Ajouter commentaire</string>
+    <string name="button_validate_add_rate">Ajouter note</string>
 
 
 </resources>

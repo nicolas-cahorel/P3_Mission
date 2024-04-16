@@ -27,6 +27,10 @@
     <string name="ivReviewersAvatar">New review author\'s avatar</string>
     <string name="tietReviewersComentHint">Share the details of your experience</string>
     <string name="button_validate">Submit</string>
+    <string name="button_validate_add_coment_rate">Add rate and coment</string>
+    <string name="button_validate_add_coment">Add coment</string>
+    <string name="button_validate_add_rate">Add rate</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
