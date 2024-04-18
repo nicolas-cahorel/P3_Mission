@@ -125,6 +125,16 @@ public class DetailsViewModel extends ViewModel {
         return averageRatingLiveData;
     }
 
+    /**
+     * A MODIFIER
+     * Fetches the details of the Taj Mahal restaurant.
+     *
+     * @return LiveData object containing the details of the Taj Mahal restaurant.
+     */
+    public LiveData<List<Review>> getTajMahalReviews() {
+        return reviewRepository.getReviews();
+    }
+
 
     /**
      * Retrieves the current day of the week in French.

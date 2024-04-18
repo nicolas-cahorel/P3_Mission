@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
-import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.List;
 import java.util.Locale;
@@ -76,10 +75,11 @@ public class DetailsFragment extends Fragment {
         binding.buttonLeaveReview.setEnabled(true);
         binding.buttonLeaveReview.setOnClickListener(new View.OnClickListener() {
 
-            /** A MODIFIER
-             * Updates the UI components with the provided starsCount data.
+            /**
+             * This method is called when the buttonLeaveReview button is clicked.
+             * It replaces the current fragment with a new instance of ReviewFragment in the UI.
              *
-             * @param totalRatings The totalRatings object containing details to be displayed.
+             * @param view The view that was clicked.
              */
             @Override
             public void onClick(View view) {
@@ -89,6 +89,8 @@ public class DetailsFragment extends Fragment {
                 fragmentTransaction.replace(R.id.container, reviewFragment);
                 fragmentTransaction.commit();
             }
+
+
         });
 
     }
