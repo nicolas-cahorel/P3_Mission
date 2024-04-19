@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/vItemReviewSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/greyRating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvItemAvatarHolder"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="@id/vItemReviewSeparator"
+        app:layout_constraintTop_toTopOf="@id/vItemReviewSeparator">
+
+        <ImageView
+            android:id="@+id/ivItemReviewAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/ivReviewersAvatar"
+            android:scaleX="-1.2"
+            android:scaleY="1.2" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvItemReviewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/jakarta_regular"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@id/cvItemAvatarHolder"
+        app:layout_constraintTop_toTopOf="@id/cvItemAvatarHolder"
+        tools:text="Manon Garcia" />
+
+    <RatingBar
+        android:id="@+id/rbItemReviewRate"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/greyRating"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:progressTint="@color/yellowRating"
+        android:rating="0"
+        android:stepSize="1"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        app:layout_constraintBottom_toBottomOf="@id/cvItemAvatarHolder"
+        app:layout_constraintStart_toEndOf="@id/cvItemAvatarHolder"
+        app:layout_constraintTop_toBottomOf="@id/tvItemReviewName" />
+
+    <TextView
+        android:id="@+id/tvItemReviewComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/grey"
+        android:textSize="10sp"
+        android:fontFamily="@font/jakarta_regular"
+        tools:text="Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!"
+        app:layout_constraintTop_toBottomOf="@id/cvItemAvatarHolder" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

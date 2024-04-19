@@ -24,11 +24,11 @@
     <string name="leave_review">Leave a review</string>
     <string name="restaurant_type">Indian restaurant</string>
     <string name="button_back">Back to restaurant details</string>
-    <string name="ivReviewersAvatar">New review author\'s avatar</string>
-    <string name="tietReviewersComentHint">Share the details of your experience</string>
+    <string name="ivReviewersAvatar">Review author\'s avatar picture</string>
+    <string name="tietReviewersCommentHint">Share the details of your experience</string>
     <string name="button_validate">Submit</string>
-    <string name="button_validate_add_coment_rate">Add rate and coment</string>
-    <string name="button_validate_add_coment">Add coment</string>
+    <string name="button_validate_add_comment_rate">Add rate and comment</string>
+    <string name="button_validate_add_comment">Add comment</string>
     <string name="button_validate_add_rate">Add rate</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -173,4 +173,9 @@ public class DetailsViewModel extends ViewModel {
         }
         return dayString;
     }
+
+    public void addReview(Review review) {
+        reviewRepository.addReview(review);
+    }
+
 }

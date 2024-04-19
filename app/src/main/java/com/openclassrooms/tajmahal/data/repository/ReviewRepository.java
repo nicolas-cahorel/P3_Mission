@@ -29,8 +29,6 @@ import javax.inject.Singleton;
 @Singleton
 public class ReviewRepository {
 
-    // The API interface instance that will be used for network requests related to restaurant data.
-    private final RestaurantApi restaurantApi;
     private final List<Review> localReviews;
     private final MutableLiveData<List<Review>> reviewsLiveData;
 
@@ -44,7 +42,7 @@ public class ReviewRepository {
      */
     @Inject
     public ReviewRepository(RestaurantApi restaurantApi) {
-        this.restaurantApi = restaurantApi;
+        // The API interface instance that will be used for network requests related to restaurant data.
         this.localReviews = new ArrayList<>();
         this.reviewsLiveData = new MutableLiveData<>();
         List<Review> reviewsFromApi = restaurantApi.getReviews();
@@ -77,11 +75,13 @@ public class ReviewRepository {
      *
      * @param review The new review to be added to the list.
      */
-    public static void addReview(Review review) {
-        // Add the new review to the local list of reviews
-        this.localReviews.add(review);
-        // Update the LiveData object with the new list of reviews
-        reviewsLiveData.postValue(this.localReviews);
+    public void addReview(Review review) {
+        // Check if the list already contains the new review
+        if (!localReviews.contains(review)) {
+            // Add the new review to the local list of reviews
+            this.localReviews.add(review);
+            // Update the LiveData object with the new list of reviews
+            reviewsLiveData.postValue(this.localReviews);
+        }
     }
-
 }

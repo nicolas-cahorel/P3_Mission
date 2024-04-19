@@ -24,11 +24,11 @@
     <string name="leave_review">Laisser un avis</string>
     <string name="restaurant_type">Restaurant Indien</string>
     <string name="button_back">Retour à la présentation du restaurant</string>
-    <string name="ivReviewersAvatar">Photo de profil de l\'auteur du nouvel avis</string>
-    <string name="tietReviewersComentHint">Partagez ici les détails de votre expérience</string>
+    <string name="ivReviewersAvatar">Photo de profil de l\'auteur de l\'avis</string>
+    <string name="tietReviewersCommentHint">Partagez ici les détails de votre expérience</string>
     <string name="button_validate">Valider</string>
-    <string name="button_validate_add_coment_rate">Ajouter note et commentaire</string>
-    <string name="button_validate_add_coment">Ajouter commentaire</string>
+    <string name="button_validate_add_comment_rate">Ajouter note et commentaire</string>
+    <string name="button_validate_add_comment">Ajouter commentaire</string>
     <string name="button_validate_add_rate">Ajouter note</string>
 
 

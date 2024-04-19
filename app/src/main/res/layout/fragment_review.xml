@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,143 +7,135 @@
     android:layout_marginTop="45dp"
     android:background="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/button_back"
+        android:focusable="true"
+        android:scaleX="-2"
+        android:scaleY="2"
+        android:src="@drawable/baseline_arrow_forward_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/tvRestaurantNameInReview"
+        android:layout_width="86dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/jakarta_bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
+        app:layout_constraintStart_toEndOf="@id/buttonBack"
+        app:layout_constraintTop_toTopOf="@id/buttonBack"
+        tools:text="Taj Mahal" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAvatarHolder"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="@id/buttonBack"
+        app:layout_constraintTop_toBottomOf="@id/buttonBack">
 
         <ImageView
-            android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/button_back"
-            android:focusable="true"
-            android:scaleX="-2"
-            android:scaleY="2"
-            android:src="@drawable/baseline_arrow_forward_12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black" />
-
-        <TextView
-            android:id="@+id/tvRestaurantNameInReview"
-            android:layout_width="86dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/jakarta_bold"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
-            app:layout_constraintStart_toEndOf="@id/buttonBack"
-            app:layout_constraintTop_toTopOf="@id/buttonBack"
-            tools:text="Taj Mahal" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvAvatarHolder"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="30dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintStart_toStartOf="@id/buttonBack"
-            app:layout_constraintTop_toBottomOf="@id/buttonBack">
-
-            <ImageView
-                android:id="@+id/ivNewReviewAvatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/ivReviewersAvatar"
-                android:scaleX="-1.2"
-                android:scaleY="1.2"
-                android:src="@drawable/avatar_manon_garcia" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvNewReviewName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/inter"
-            android:textColor="@color/grey"
-            android:textSize="12sp"
-            android:visibility="visible"
-            app:layout_constraintStart_toEndOf="@id/cvAvatarHolder"
-            app:layout_constraintTop_toTopOf="@id/cvAvatarHolder"
-            tools:text="Manon Garcia" />
-
-        <RatingBar
-            android:id="@+id/rbNewReviewRate"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/greyRating"
-            android:isIndicator="false"
-            android:numStars="5"
-            android:progressTint="@color/yellowRating"
-            android:rating="0"
-            android:stepSize="1"
-            android:scaleX="1.6"
-            android:scaleY="1.6"
-            app:layout_constraintBottom_toBottomOf="@id/cvAvatarHolder"
-            app:layout_constraintStart_toEndOf="@id/cvAvatarHolder"
-            app:layout_constraintTop_toBottomOf="@id/tvNewReviewName" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/buttonValidate"
-            style="@style/Widget.Material3.Chip.Suggestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:text="@string/button_validate"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:visibility="visible"
-            app:chipBackgroundColor="@color/redButton"
-            app:chipCornerRadius="10dp"
-            app:chipStrokeColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cvAvatarHolder"
-            app:textEndPadding="5dp"
-            app:textStartPadding="5dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilNewReviewComent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:layout_constraintStart_toStartOf="@id/cvAvatarHolder"
-            app:layout_constraintTop_toBottomOf="@id/cvAvatarHolder">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietNewReviewComent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:hint="@string/tietReviewersComentHint"
-                android:textColor="@color/greyText"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- RecycleView to display de reviews
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/fragment_review_recycler_view"
+            android:id="@+id/ivNewReviewAvatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilNewReviewComent" />
-        -->
+            android:contentDescription="@string/ivReviewersAvatar"
+            android:scaleX="-1.2"
+            android:scaleY="1.2" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvNewReviewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@id/cvAvatarHolder"
+        app:layout_constraintTop_toTopOf="@id/cvAvatarHolder"
+        tools:text="Manon Garcia" />
+
+    <RatingBar
+        android:id="@+id/rbNewReviewRate"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/greyRating"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:progressTint="@color/yellowRating"
+        android:rating="0"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="@id/cvAvatarHolder"
+        app:layout_constraintStart_toEndOf="@id/cvAvatarHolder"
+        app:layout_constraintTop_toBottomOf="@id/tvNewReviewName" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/buttonValidate"
+        style="@style/Widget.Material3.Chip.Suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="@string/button_validate"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:chipBackgroundColor="@color/redButton"
+        app:chipCornerRadius="10dp"
+        app:chipStrokeColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cvAvatarHolder"
+        app:textEndPadding="5dp"
+        app:textStartPadding="5dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilNewReviewComment"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintStart_toStartOf="@id/cvAvatarHolder"
+        app:layout_constraintTop_toBottomOf="@id/cvAvatarHolder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietNewReviewComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:hint="@string/tietReviewersCommentHint"
+            android:textColor="@color/greyText"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- // RecycleView to display the reviews -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_review_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilNewReviewComment" />
 
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
