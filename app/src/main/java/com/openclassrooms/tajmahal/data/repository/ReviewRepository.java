@@ -79,7 +79,7 @@ public class ReviewRepository {
         // Check if the list already contains the new review
         if (!localReviews.contains(review)) {
             // Add the new review to the local list of reviews
-            this.localReviews.add(review);
+            this.localReviews.add(0,review);
             // Update the LiveData object with the new list of reviews
             reviewsLiveData.postValue(this.localReviews);
         }

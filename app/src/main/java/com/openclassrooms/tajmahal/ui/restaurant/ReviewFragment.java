@@ -1,7 +1,7 @@
 package com.openclassrooms.tajmahal.ui.restaurant;
 
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.Window;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -43,6 +43,7 @@ public class ReviewFragment extends Fragment {
     private FragmentReviewBinding binding;
     private DetailsViewModel detailsViewModel;
     private Review newReview;
+    private String avatarUrl;
 
     /**
      * Initializes the ViewModel for this activity.
@@ -80,12 +81,14 @@ public class ReviewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupViewModel(); // Prepares the ViewModel for the fragment.
+        setupUI(); // Sets up user interface components.
         detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews); // Observes changes in the reviews data and updates the UI accordingly.
         binding.tvRestaurantNameInReview.setText("Taj Mahal");
         binding.buttonBack.setEnabled(true);
         binding.tvNewReviewName.setText("Manon Garcia");
+        this.avatarUrl  = "https://s3-alpha-sig.figma.com/img/02e6/6d63/e35d4fc4ab41421bdc4ea8ec50940749?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kMBgvHNZs3pb4gMB8uACW-mXV-Wbo2gfLwtfkCN~8LNpAGpafP5DSMu76ucdJ5B6OJkx8C5bxGKJESzwpnk7pKAqbAiUqdJVFm7kDCg5lMRFXt1Wf2U9EVonpsMUiY2-C2QGHMUJwQGGDFdov3RWDH2HV0gJIMM7-OK4Iag0e0sijV0qmGve8Uo1arI6IV-yLBrfkYUxOpy23swcUmY85EcaW1hNpv1RoMvQYlwtlsrGBysgQuq0K48saCS94gYFSAH8jv2KACACo1pXFhWVWMQ5yOXPY6CCnH4JZXvLDl~NU9xRhmkKXkwIPSrkbjhtA4-D9MPS7JSDQ1PG6Kx1Fw__";
         Glide.with(binding.getRoot())
-                .load("https://s3-alpha-sig.figma.com/img/02e6/6d63/e35d4fc4ab41421bdc4ea8ec50940749?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kMBgvHNZs3pb4gMB8uACW-mXV-Wbo2gfLwtfkCN~8LNpAGpafP5DSMu76ucdJ5B6OJkx8C5bxGKJESzwpnk7pKAqbAiUqdJVFm7kDCg5lMRFXt1Wf2U9EVonpsMUiY2-C2QGHMUJwQGGDFdov3RWDH2HV0gJIMM7-OK4Iag0e0sijV0qmGve8Uo1arI6IV-yLBrfkYUxOpy23swcUmY85EcaW1hNpv1RoMvQYlwtlsrGBysgQuq0K48saCS94gYFSAH8jv2KACACo1pXFhWVWMQ5yOXPY6CCnH4JZXvLDl~NU9xRhmkKXkwIPSrkbjhtA4-D9MPS7JSDQ1PG6Kx1Fw__")
+                .load(avatarUrl)
                 .into(binding.ivNewReviewAvatar);
         binding.buttonValidate.setEnabled(false);
         binding.buttonValidate.setText(getString(R.string.button_validate));
@@ -160,17 +163,18 @@ public class ReviewFragment extends Fragment {
         TextView tvNewReviewName = binding.tvNewReviewName;
         String author = tvNewReviewName.getText().toString();
         // Recupere l'url de l'avatar de l'auteur de la nouvelle review
-        ImageView ivNewReviewAvatar = binding.ivNewReviewAvatar;
-        Drawable drawable = ivNewReviewAvatar.getDrawable();
-        String avatarUrl = "";
-        if (drawable != null) {
-            int resId = drawable.getConstantState().getChangingConfigurations();
-            int resourceId = getResources().getIdentifier("avatar_manon_garcia", "drawable", requireContext().getPackageName());
-            avatarUrl = "@drawable/" + getResources().getResourceEntryName(resourceId);
-        }
+        //ImageView ivNewReviewAvatar = binding.ivNewReviewAvatar;
+        //Drawable drawable = ivNewReviewAvatar.getDrawable();
+       // String avatarUrl = "";
+        //if (drawable != null) {
+         //   int resId = drawable.getConstantState().getChangingConfigurations();
+           // int resourceId = getResources().getIdentifier("avatar_manon_garcia", "drawable", requireContext().getPackageName());
+         //   avatarUrl = "@drawable/" + getResources().getResourceEntryName(resourceId);
+       // }
         // Recupere la note de la nouvelle review
         RatingBar rbNewReviewRate = binding.rbNewReviewRate;
-        int rating = rbNewReviewRate.getNumStars();
+        float ratingFloat = rbNewReviewRate.getRating();
+        int rating = (int) ratingFloat;
         // Recupere le commentaire de la nouvelle review
         TextInputEditText tietNewReviewComent = binding.tietNewReviewComment;
         String content = tietNewReviewComent.getText().toString();
@@ -184,8 +188,21 @@ public class ReviewFragment extends Fragment {
         binding.fragmentReviewRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ReviewAdapter adapter = new ReviewAdapter(reviews);
         binding.fragmentReviewRecyclerView.setAdapter(adapter);
-
-        // implementer ici la maj de la liste des reviews avec la recycleview
     }
 
+    /**
+     * Sets up the UI-specific properties, such as system UI flags and status bar color.
+     */
+    private void setupUI() {
+        Window window = requireActivity().getWindow();
+        window.getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+        // Change the status bar color to white
+        window.setStatusBarColor(Color.WHITE);
+        // Use dark mode for the status bar text
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        // Change the navigation bar color to white
+        window.setNavigationBarColor(Color.WHITE);
+    }
 }

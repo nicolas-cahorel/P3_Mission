@@ -64,12 +64,6 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupUI(); // Sets up user interface components.
-        setupViewModel(); // Prepares the ViewModel for the fragment.
-        detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
-        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings); // Observes changes in totalRatings and updates the UI accordingly.
-        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount); // Observes changes in ratingCount and updates the UI accordingly.
-        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
 
         // New features
         binding.buttonLeaveReview.setEnabled(true);
@@ -108,6 +102,15 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
+
+        setupUI(); // Sets up user interface components.
+        setupViewModel(); // Prepares the ViewModel for the fragment.
+        detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
+        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings); // Observes changes in totalRatings and updates the UI accordingly.
+        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount); // Observes changes in ratingCount and updates the UI accordingly.
+        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
+
+
         return binding.getRoot(); // Returns the root view.
     }
 

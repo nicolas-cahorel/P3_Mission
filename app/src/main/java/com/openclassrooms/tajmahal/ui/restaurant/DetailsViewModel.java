@@ -55,6 +55,17 @@ public class DetailsViewModel extends ViewModel {
         return restaurantRepository.getRestaurant();
     }
 
+    public LiveData<List<Review>> getTajMahalReviews() {
+        return reviewRepository.getReviews();
+    }
+
+
+    /**
+     * Retrieves the current day of the week in French.
+     *
+     * @return A string representing the current day of the week in French.
+     */
+
     /**
      * Fetches the details of the Taj Mahal total ratings.
      *
@@ -131,16 +142,7 @@ public class DetailsViewModel extends ViewModel {
      *
      * @return LiveData object containing the details of the Taj Mahal restaurant.
      */
-    public LiveData<List<Review>> getTajMahalReviews() {
-        return reviewRepository.getReviews();
-    }
 
-
-    /**
-     * Retrieves the current day of the week in French.
-     *
-     * @return A string representing the current day of the week in French.
-     */
     public String getCurrentDay(Context context) {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
