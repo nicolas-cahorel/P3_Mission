@@ -1,9 +1,13 @@
 package com.openclassrooms.tajmahal.data.repository;
 
 
+import android.content.Context;
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.openclassrooms.tajmahal.TajMahalApplication;
 import com.openclassrooms.tajmahal.data.service.RestaurantApi;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
@@ -42,6 +46,9 @@ public class ReviewRepository {
      */
     @Inject
     public ReviewRepository(RestaurantApi restaurantApi) {
+        if (restaurantApi == null) {
+            throw new IllegalArgumentException("restaurantApi cannot be null");
+        }
         // The API interface instance that will be used for network requests related to restaurant data.
         this.localReviews = new ArrayList<>();
         this.reviewsLiveData = new MutableLiveData<>();
@@ -76,12 +83,28 @@ public class ReviewRepository {
      * @param review The new review to be added to the list.
      */
     public void addReview(Review review) {
-        // Check if the list already contains the new review a modifier !!!
-        if (!localReviews.contains(review) && !review.getContent().isEmpty()) {
-            // Add the new review to the local list of reviews
-            this.localReviews.add(0,review);
-            // Update the LiveData object with the new list of reviews
-            reviewsLiveData.setValue(this.localReviews);
+
+        // obtain a valid reference to the Context object for the display of the Toast
+        Context context = TajMahalApplication.getAppContext();
+
+        // Check if the local list do not contain the new review
+        if (!localReviews.contains(review)) {
+            // Check if the new review contains a comment
+            if (!review.getContent().isEmpty()) {
+                // Check if the new reviews rate is between 1 and 5
+                if (review.getRating() >= 1 && review.getRating() <= 5) {
+                    // Add the new review to the top of the local list of reviews
+                    this.localReviews.add(0, review);
+                    // Update the LiveData object with the new list of reviews
+                    reviewsLiveData.setValue(this.localReviews);
+                } else {
+                    Toast.makeText(context, "App Error : the new reviews rate should be between 1 and 5", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(context, "App Error : the new reviews comment should not be empty", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(context, "App Error : the new review already exists", Toast.LENGTH_SHORT).show();
         }
     }
 }

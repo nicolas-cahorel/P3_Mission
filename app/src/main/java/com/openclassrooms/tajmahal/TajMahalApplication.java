@@ -1,6 +1,8 @@
 package com.openclassrooms.tajmahal;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 
 import dagger.hilt.android.HiltAndroidApp;
 
@@ -27,4 +29,15 @@ import dagger.hilt.android.HiltAndroidApp;
  */
 @HiltAndroidApp
 public class TajMahalApplication extends Application {
+    @SuppressLint("StaticFieldLeak")
+    private static Context context;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        context = getApplicationContext();
+    }
+
+    public static Context getAppContext() {
+        return context;
+    }
 }

@@ -76,7 +76,7 @@ public class ReviewFragment extends Fragment {
         binding.tvRestaurantNameInReview.setText("Taj Mahal");
         binding.buttonBack.setEnabled(true);
         binding.tvNewReviewName.setText("Manon Garcia");
-        this.avatarUrl  = "https://s3-alpha-sig.figma.com/img/02e6/6d63/e35d4fc4ab41421bdc4ea8ec50940749?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kMBgvHNZs3pb4gMB8uACW-mXV-Wbo2gfLwtfkCN~8LNpAGpafP5DSMu76ucdJ5B6OJkx8C5bxGKJESzwpnk7pKAqbAiUqdJVFm7kDCg5lMRFXt1Wf2U9EVonpsMUiY2-C2QGHMUJwQGGDFdov3RWDH2HV0gJIMM7-OK4Iag0e0sijV0qmGve8Uo1arI6IV-yLBrfkYUxOpy23swcUmY85EcaW1hNpv1RoMvQYlwtlsrGBysgQuq0K48saCS94gYFSAH8jv2KACACo1pXFhWVWMQ5yOXPY6CCnH4JZXvLDl~NU9xRhmkKXkwIPSrkbjhtA4-D9MPS7JSDQ1PG6Kx1Fw__";
+        this.avatarUrl = "https://s3-alpha-sig.figma.com/img/02e6/6d63/e35d4fc4ab41421bdc4ea8ec50940749?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kMBgvHNZs3pb4gMB8uACW-mXV-Wbo2gfLwtfkCN~8LNpAGpafP5DSMu76ucdJ5B6OJkx8C5bxGKJESzwpnk7pKAqbAiUqdJVFm7kDCg5lMRFXt1Wf2U9EVonpsMUiY2-C2QGHMUJwQGGDFdov3RWDH2HV0gJIMM7-OK4Iag0e0sijV0qmGve8Uo1arI6IV-yLBrfkYUxOpy23swcUmY85EcaW1hNpv1RoMvQYlwtlsrGBysgQuq0K48saCS94gYFSAH8jv2KACACo1pXFhWVWMQ5yOXPY6CCnH4JZXvLDl~NU9xRhmkKXkwIPSrkbjhtA4-D9MPS7JSDQ1PG6Kx1Fw__";
         Glide.with(binding.getRoot())
                 .load(avatarUrl)
                 .into(binding.ivNewReviewAvatar);
@@ -153,14 +153,7 @@ public class ReviewFragment extends Fragment {
         TextView tvNewReviewName = binding.tvNewReviewName;
         String author = tvNewReviewName.getText().toString();
         // Recupere l'url de l'avatar de l'auteur de la nouvelle review
-        //ImageView ivNewReviewAvatar = binding.ivNewReviewAvatar;
-        //Drawable drawable = ivNewReviewAvatar.getDrawable();
-       // String avatarUrl = "";
-        //if (drawable != null) {
-         //   int resId = drawable.getConstantState().getChangingConfigurations();
-           // int resourceId = getResources().getIdentifier("avatar_manon_garcia", "drawable", requireContext().getPackageName());
-         //   avatarUrl = "@drawable/" + getResources().getResourceEntryName(resourceId);
-       // }
+        // --> Voir dans la méthode OnViewCreated
         // Recupere la note de la nouvelle review
         RatingBar rbNewReviewRate = binding.rbNewReviewRate;
         float ratingFloat = rbNewReviewRate.getRating();

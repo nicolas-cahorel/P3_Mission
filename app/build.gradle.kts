@@ -41,7 +41,7 @@ android {
 
 dependencies {
     implementation("androidx.work:work-runtime:2.9.0")
-    val hiltVersion = "2.44"
+    val hiltVersion = "2.51.1"
 
     //Hilt
     implementation("com.google.dagger:hilt-android:${hiltVersion}")
@@ -53,17 +53,32 @@ dependencies {
     implementation("androidx.work:work-runtime:2.9.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+
 
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("com.android.support:recyclerview-v7:28.0.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.13.2")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
-    testImplementation ("org.mockito:mockito-core:3.11.2")
-//    testImplementation ("androidx.lifecycle:lifecycle-testing:2.5.0")
+    testImplementation ("org.mockito:mockito-core:5.11.0")
+    testImplementation ("org.mockito:mockito-junit-jupiter:5.11.0")
+
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test:runner:1.5.2")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+
+    // JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+
+    // Hilt
+    testImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.robolectric:robolectric:4.12.1")
+
 
 }

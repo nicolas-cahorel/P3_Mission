@@ -6,6 +6,8 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Singleton;
+
 /**
  * A mock implementation of the {@link RestaurantApi} for testing and development purposes.
  * <p>
@@ -27,6 +29,7 @@ import java.util.List;
  * @see Restaurant
  * @see RestaurantApi
  */
+@Singleton
 public class RestaurantFakeApi implements RestaurantApi {
 
     List<Review> reviews = Arrays.asList(

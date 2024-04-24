@@ -87,7 +87,7 @@ public class DetailsViewModel extends ViewModel {
      * Retrieves the rating count details for the Taj Mahal restaurant.
      *
      * @return a MutableLiveData object containing a list of integers representing the rating count details for the Taj Mahal restaurant.
-     * Each integer is expressed as a percentage of the total number of ratings.
+     * Each integer corresponds to the number of ratings for a particular star rating.
      */
     public MutableLiveData<List<Integer>> getTajMahalRatingCount() {
         MutableLiveData<List<Integer>> ratingCountLiveData = new MutableLiveData<>();
@@ -117,10 +117,9 @@ public class DetailsViewModel extends ViewModel {
     }
 
     /**
-     * a modifier
-     * Fetches the details of the Taj Mahal average rating.
+     * Retrieves the details of the Taj Mahal average rating.
      *
-     * @return LiveData object containing the details of the Taj Mahal average rating.
+     * @return a MutableLiveData object containing the Taj Mahal reviews average rating.
      */
     public MutableLiveData<Float> getTajMahalAverageRating() {
         MutableLiveData<Float> averageRatingLiveData = new MutableLiveData<>();
