@@ -52,17 +52,7 @@ public class ReviewFragment extends Fragment {
         detailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
     }
 
-    /**
-     * Factory method for creating a new instance of ReviewFragment with the given ReviewRepository.
-     *
-     * @param reviewRepository the ReviewRepository to be used by this fragment
-     * @return a new instance of ReviewFragment
-     */
-//    public static ReviewFragment newInstance(ReviewRepository reviewRepository) {
-//        ReviewFragment fragment = new ReviewFragment();
-//        fragment.reviewRepository = reviewRepository;
-//        return fragment;
-//    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

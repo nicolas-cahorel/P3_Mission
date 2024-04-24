@@ -41,6 +41,7 @@ public class DetailsFragment extends Fragment {
 
     private DetailsViewModel detailsViewModel;
 
+
     /**
      * This method is called when the fragment is first created.
      * It's used to perform one-time initialization.
@@ -51,6 +52,25 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+
+    /**
+     * Creates and returns the view hierarchy associated with the fragment.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     *                           The fragment should not add the view itself but return it.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     *                           from a previous saved state as given here.
+     * @return Returns the View for the fragment's UI, or null.
+     */
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
+
+
+        return binding.getRoot(); // Returns the root view.
     }
 
     /**
@@ -64,8 +84,13 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setupUI(); // Sets up user interface components.
+        setupViewModel(); // Prepares the ViewModel for the fragment.
+        detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
+        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings); // Observes changes in totalRatings and updates the UI accordingly.
+        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount); // Observes changes in ratingCount and updates the UI accordingly.
+        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
 
-        // New features
         binding.buttonLeaveReview.setEnabled(true);
         binding.buttonLeaveReview.setOnClickListener(new View.OnClickListener() {
 
@@ -90,28 +115,10 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * Creates and returns the view hierarchy associated with the fragment.
-     *
-     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     *                           The fragment should not add the view itself but return it.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     *                           from a previous saved state as given here.
-     * @return Returns the View for the fragment's UI, or null.
+     * Initializes the ViewModel for this activity.
      */
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
-
-        setupUI(); // Sets up user interface components.
-        setupViewModel(); // Prepares the ViewModel for the fragment.
-        detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
-        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings); // Observes changes in totalRatings and updates the UI accordingly.
-        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount); // Observes changes in ratingCount and updates the UI accordingly.
-        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
-
-
-        return binding.getRoot(); // Returns the root view.
+    private void setupViewModel() {
+        detailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
     }
 
 
@@ -124,13 +131,6 @@ public class DetailsFragment extends Fragment {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
         window.setStatusBarColor(Color.TRANSPARENT);
-    }
-
-    /**
-     * Initializes the ViewModel for this activity.
-     */
-    private void setupViewModel() {
-        detailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
     }
 
     /**
@@ -156,8 +156,9 @@ public class DetailsFragment extends Fragment {
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
     }
 
+
     /**
-     * Updates the UI components with the provided starsCount data.
+     * Updates the UI components with the provided ratings data.
      *
      * @param totalRatings The totalRatings object containing details to be displayed.
      */
@@ -166,7 +167,7 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * Updates the UI components with the provided starsCount data.
+     * Updates the UI components with the provided ratings data.
      *
      * @param ratingCount The ratingCount object containing details to be displayed.
      */
@@ -179,7 +180,7 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * Updates the UI components with the provided averageRating data.
+     * Updates the UI components with the provided ratings data.
      *
      * @param averageRating The averageRating object containing details to be displayed.
      */
@@ -237,8 +238,14 @@ public class DetailsFragment extends Fragment {
         }
     }
 
+    /**
+     * This method is used to create a new instance of DetailsFragment.
+     *
+     * @return a new instance of DetailsFragment.
+     */
     public static DetailsFragment newInstance() {
         return new DetailsFragment();
     }
+
 
 }

@@ -22,9 +22,9 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 /**
- * MainViewModel is responsible for preparing and managing the data for the {@link DetailsFragment}.
- * It communicates with the {@link RestaurantRepository} to fetch restaurant details and provides
- * utility methods related to the restaurant UI.
+ * MainViewModel is responsible for preparing and managing the data for the {@link DetailsFragment} and {@link ReviewFragment}.
+ * It communicates with the {@link RestaurantRepository} and {@link ReviewRepository} to fetch restaurant and reviews details and provides
+ * utility methods related to the restaurant UI and review UI.
  * <p>
  * This ViewModel is integrated with Hilt for dependency injection.
  */
@@ -55,21 +55,20 @@ public class DetailsViewModel extends ViewModel {
         return restaurantRepository.getRestaurant();
     }
 
+    /**
+     * Fetches the list of reviews of the Taj Mahal restaurant.
+     *
+     * @return LiveData object containing the list of reviews of the Taj Mahal restaurant.
+     */
     public LiveData<List<Review>> getTajMahalReviews() {
         return reviewRepository.getReviews();
     }
 
 
     /**
-     * Retrieves the current day of the week in French.
+     * Retrieves the total number of ratings for the Taj Mahal restaurant.
      *
-     * @return A string representing the current day of the week in French.
-     */
-
-    /**
-     * Fetches the details of the Taj Mahal total ratings.
-     *
-     * @return LiveData object containing the details of the Taj Mahal total ratings.
+     * @return a MutableLiveData object containing the total number of ratings for the Taj Mahal restaurant.
      */
     public MutableLiveData<Integer> getTajMahalTotalRatings() {
         MutableLiveData<Integer> totalRatingsLiveData = new MutableLiveData<>();
@@ -83,10 +82,12 @@ public class DetailsViewModel extends ViewModel {
         return totalRatingsLiveData;
     }
 
+
     /**
-     * Fetches the details of the Taj Mahal rating.
+     * Retrieves the rating count details for the Taj Mahal restaurant.
      *
-     * @return LiveData object containing the details of the Taj Mahal rating.
+     * @return a MutableLiveData object containing a list of integers representing the rating count details for the Taj Mahal restaurant.
+     * Each integer is expressed as a percentage of the total number of ratings.
      */
     public MutableLiveData<List<Integer>> getTajMahalRatingCount() {
         MutableLiveData<List<Integer>> ratingCountLiveData = new MutableLiveData<>();
@@ -116,6 +117,7 @@ public class DetailsViewModel extends ViewModel {
     }
 
     /**
+     * a modifier
      * Fetches the details of the Taj Mahal average rating.
      *
      * @return LiveData object containing the details of the Taj Mahal average rating.
@@ -136,13 +138,12 @@ public class DetailsViewModel extends ViewModel {
         return averageRatingLiveData;
     }
 
-    /**
-     * A MODIFIER
-     * Fetches the details of the Taj Mahal restaurant.
-     *
-     * @return LiveData object containing the details of the Taj Mahal restaurant.
-     */
 
+    /**
+     * Retrieves the current day of the week in French.
+     *
+     * @return A string representing the current day of the week in French.
+     */
     public String getCurrentDay(Context context) {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -176,6 +177,7 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
+    // javadoc a faire
     public void addReview(Review review) {
         reviewRepository.addReview(review);
     }

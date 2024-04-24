@@ -48,7 +48,7 @@ public class ReviewRepository {
         List<Review> reviewsFromApi = restaurantApi.getReviews();
         if (reviewsFromApi != null) {
             this.localReviews.addAll(reviewsFromApi);
-            this.reviewsLiveData.postValue(this.localReviews);
+            this.reviewsLiveData.setValue(this.localReviews);
         }
     }
 
@@ -65,7 +65,7 @@ public class ReviewRepository {
      */
     public LiveData<List<Review>> getReviews() {
         if (reviewsLiveData.getValue() == null) {
-            reviewsLiveData.postValue(this.localReviews);
+            reviewsLiveData.setValue(this.localReviews);
         }
         return reviewsLiveData;
     }
@@ -76,12 +76,12 @@ public class ReviewRepository {
      * @param review The new review to be added to the list.
      */
     public void addReview(Review review) {
-        // Check if the list already contains the new review
-        if (!localReviews.contains(review)) {
+        // Check if the list already contains the new review a modifier !!!
+        if (!localReviews.contains(review) && !review.getContent().isEmpty()) {
             // Add the new review to the local list of reviews
             this.localReviews.add(0,review);
             // Update the LiveData object with the new list of reviews
-            reviewsLiveData.postValue(this.localReviews);
+            reviewsLiveData.setValue(this.localReviews);
         }
     }
 }

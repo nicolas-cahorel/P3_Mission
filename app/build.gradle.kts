@@ -34,7 +34,9 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
+
 }
 
 dependencies {
@@ -58,7 +60,10 @@ dependencies {
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("com.android.support:recyclerview-v7:28.0.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.github.bumptech.glide:glide:4.13.2")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
+
+    testImplementation ("org.mockito:mockito-core:3.11.2")
+//    testImplementation ("androidx.lifecycle:lifecycle-testing:2.5.0")
 
 }
