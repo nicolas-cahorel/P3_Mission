@@ -12,6 +12,8 @@ package com.openclassrooms.tajmahal.domain.model;
  * </pre>
  */
 
+import java.util.Objects;
+
 /**
  * Represents a review for the restaurant.
  */
@@ -37,36 +39,98 @@ public class Review {
         this.rating = rating;
     }
 
-
+    /**
+     * Returns the author of the review.
+     *
+     * @return The author of the review
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * Sets the author of the review.
+     *
+     * @param author The author of the review
+     */
     public void setAuthor(String author) {
         this.author = author;
     }
 
+    /**
+     * Returns the URL of the author's avatar.
+     *
+     * @return The URL of the author's avatar
+     */
     public String getAvatarUrl() {
         return avatarUrl;
     }
 
+
+    /**
+     * Sets the URL of the author's avatar.
+     *
+     * @param avatarUrl The URL of the author's avatar
+     */
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
 
+    /**
+     * Returns the content of the review.
+     *
+     * @return The content of the review
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * Sets the content of the review.
+     *
+     * @param content The content of the review
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     * Returns the rating of the review.
+     *
+     * @return The rating of the review
+     */
     public int getRating() {
         return rating;
     }
 
+    /**
+     * Sets the rating of the review.
+     *
+     * @param rating The rating of the review
+     */
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    /**
+     * Compares this review to the specified object.
+     * The result is true if and only if the argument is not null and is a Review object that contains the same author, avatar URL, content and rating as this review.
+     *
+     * @param obj The object to compare with this review
+     * @return true if the review objects are the same; false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Review)) {
+            return false;
+        }
+        Review other = (Review) obj;
+        return getRating() == other.getRating() &&
+                Objects.equals(getAuthor(), other.getAuthor()) &&
+                Objects.equals(getAvatarUrl(), other.getAvatarUrl()) &&
+                Objects.equals(getContent(), other.getContent());
     }
 }

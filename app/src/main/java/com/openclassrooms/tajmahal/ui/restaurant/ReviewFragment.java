@@ -30,6 +30,7 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 import com.openclassrooms.tajmahal.views.ReviewAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -60,7 +61,7 @@ public class ReviewFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentReviewBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -73,34 +74,28 @@ public class ReviewFragment extends Fragment {
         setupViewModel(); // Prepares the ViewModel for the fragment.
         setupUI(); // Sets up user interface components.
         detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews); // Observes changes in the reviews data and updates the UI accordingly.
-        binding.tvRestaurantNameInReview.setText("Taj Mahal");
+        binding.tvRestaurantNameInReview.setText(getString(R.string.restaurant_name));
         binding.buttonBack.setEnabled(true);
-        binding.tvNewReviewName.setText("Manon Garcia");
+        binding.tvNewReviewName.setText(getString(R.string.new_reviewers_name));
         this.avatarUrl = "https://s3-alpha-sig.figma.com/img/02e6/6d63/e35d4fc4ab41421bdc4ea8ec50940749?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kMBgvHNZs3pb4gMB8uACW-mXV-Wbo2gfLwtfkCN~8LNpAGpafP5DSMu76ucdJ5B6OJkx8C5bxGKJESzwpnk7pKAqbAiUqdJVFm7kDCg5lMRFXt1Wf2U9EVonpsMUiY2-C2QGHMUJwQGGDFdov3RWDH2HV0gJIMM7-OK4Iag0e0sijV0qmGve8Uo1arI6IV-yLBrfkYUxOpy23swcUmY85EcaW1hNpv1RoMvQYlwtlsrGBysgQuq0K48saCS94gYFSAH8jv2KACACo1pXFhWVWMQ5yOXPY6CCnH4JZXvLDl~NU9xRhmkKXkwIPSrkbjhtA4-D9MPS7JSDQ1PG6Kx1Fw__";
         Glide.with(binding.getRoot())
                 .load(avatarUrl)
                 .into(binding.ivNewReviewAvatar);
-        binding.buttonValidate.setEnabled(false);
+        binding.buttonValidate.setEnabled(true);
         binding.buttonValidate.setText(getString(R.string.button_validate));
-        binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
+        //binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
 
-        binding.buttonValidate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewReview();
-                detailsViewModel.addReview(newReview);
-            }
-
+        binding.buttonValidate.setOnClickListener(v -> {
+            createNewReview();
+            detailsViewModel.addReview(newReview);
         });
-        binding.buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                DetailsFragment detailsFragment = new DetailsFragment();
-                fragmentTransaction.replace(R.id.container, detailsFragment);
-                fragmentTransaction.commit();
-            }
+
+        binding.buttonBack.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            DetailsFragment detailsFragment = new DetailsFragment();
+            fragmentTransaction.replace(R.id.container, detailsFragment);
+            fragmentTransaction.commit();
         });
         binding.tietNewReviewComment.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,20 +110,16 @@ public class ReviewFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                updateButtonState();
+               updateButtonState();
             }
         });
-        binding.rbNewReviewRate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                updateButtonState();
-            }
-        });
+        binding.rbNewReviewRate.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> updateButtonState());
+
     }
 
     private void updateButtonState() {
         float rbNewReviewRate = binding.rbNewReviewRate.getRating();
-        String tietNewReviewComment = binding.tietNewReviewComment.getText().toString();
+        String tietNewReviewComment = Objects.requireNonNull(binding.tietNewReviewComment.getText()).toString();
 
         if (rbNewReviewRate == 0 && tietNewReviewComment.isEmpty()) {
             binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
@@ -160,7 +151,7 @@ public class ReviewFragment extends Fragment {
         int rating = (int) ratingFloat;
         // Recupere le commentaire de la nouvelle review
         TextInputEditText tietNewReviewComent = binding.tietNewReviewComment;
-        String content = tietNewReviewComent.getText().toString();
+        String content = Objects.requireNonNull(tietNewReviewComent.getText()).toString();
 
         // Cree une nouvelle instance de l'objet à ajouter
         newReview = new Review(author, avatarUrl, content, rating);

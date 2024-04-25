@@ -176,7 +176,11 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
-    // javadoc a faire
+    /**
+     * Adds a new review to the list of reviews for the restaurant.
+     *
+     * @param review The review object containing the details of the review to be added.
+     */
     public void addReview(Review review) {
         reviewRepository.addReview(review);
     }

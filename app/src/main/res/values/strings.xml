@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TajMahal</string>
+    <string name="app_name" translatable="false">TajMahal</string>
     <string name="restaurant">Restaurant</string>
     <string name="maps_not_installed">Google Maps is not installed.</string>
     <string name="phone_not_found">No app found for making calls.</string>
@@ -23,11 +23,15 @@
     <string name="phone_icon">Phone icon</string>
     <string name="leave_review">Leave a review</string>
     <string name="restaurant_type">Indian restaurant</string>
+    <string name="restaurant_name">Taj Mahal</string>
     <string name="button_back">Back to restaurant details</string>
     <string name="ivReviewersAvatar">Review author\'s avatar picture</string>
     <string name="tietReviewersCommentHint">Share the details of your experience</string>
     <string name="button_validate">Submit</string>
-    <string name="button_validate_add_comment_rate">Add rate and comment</string>
-    <string name="button_validate_add_comment">Add comment</string>
-    <string name="button_validate_add_rate">Add rate</string>
+    <string name="error_validate_add_comment_rate">Add rate (1–5) and comment</string>
+    <string name="error_validate_add_comment">Add comment</string>
+    <string name="error_validate_add_rate">Add rate (1–5)</string>
+    <string name="error_existing_review">Review already exists</string>
+    <string name="error_review_list_is_empty">Review list is not up to date (=empty)</string>
+    <string name="new_reviewers_name">Manon Garcia</string>
 </resources>
