@@ -41,9 +41,16 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class ReviewFragment extends Fragment {
 
+    // Binding object instance corresponding to the fragment_review.xml layout
     private FragmentReviewBinding binding;
+
+    // ViewModel instance for handling the business logic related to this fragment
     private DetailsViewModel detailsViewModel;
+
+    // Represents a new review to be added
     private Review newReview;
+
+    // URL for the avatar image
     private String avatarUrl;
 
     /**
@@ -53,13 +60,28 @@ public class ReviewFragment extends Fragment {
         detailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
     }
 
-
+    /**
+     * This method is called when the fragment is first created.
+     * It's used to perform one-time initialization.
+     *
+     * @param savedInstanceState A bundle containing previously saved instance state.
+     *                           If the fragment is being re-created from a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
+    /**
+     * Creates and returns the view hierarchy associated with the fragment.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     *                           The fragment should not add the view itself but return it.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     *                           from a previous saved state as given here.
+     * @return Returns the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,9 +89,17 @@ public class ReviewFragment extends Fragment {
         return binding.getRoot();
     }
 
-
+    /**
+     * This method is called immediately after `onCreateView()`.
+     * Use this method to perform final initialization once the fragment views have been inflated.
+     *
+     * @param view               The View returned by `onCreateView()`.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     *                           from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        // Calls the superclass' onViewCreated() method to ensure proper initialization and default behavior before performing specific operations in the current fragment.
         super.onViewCreated(view, savedInstanceState);
         setupViewModel(); // Prepares the ViewModel for the fragment.
         setupUI(); // Sets up user interface components.
@@ -83,13 +113,16 @@ public class ReviewFragment extends Fragment {
                 .into(binding.ivNewReviewAvatar);
         binding.buttonValidate.setEnabled(true);
         binding.buttonValidate.setText(getString(R.string.button_validate));
-        //binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
+        // UNIT TESTS : comment the line below to run the unit tests
+        binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
 
         binding.buttonValidate.setOnClickListener(v -> {
             createNewReview();
             detailsViewModel.addReview(newReview);
         });
 
+        // Sets an OnClickListener for the back button. When clicked, it replaces the current fragment with the DetailsFragment
+        // by using a FragmentTransaction, allowing the user to navigate back to the details view.
         binding.buttonBack.setOnClickListener(v -> {
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -110,13 +143,18 @@ public class ReviewFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-               updateButtonState();
+                // UNIT TESTS : comment the line below to run the unit tests
+                updateButtonState();
             }
         });
+        // UNIT TESTS : comment the line below to run the unit tests
         binding.rbNewReviewRate.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> updateButtonState());
 
     }
 
+    /**
+     * Updates the enabled state and background color of the 'Validate' button based on the user input.
+     */
     private void updateButtonState() {
         float rbNewReviewRate = binding.rbNewReviewRate.getRating();
         String tietNewReviewComment = Objects.requireNonNull(binding.tietNewReviewComment.getText()).toString();
@@ -133,30 +171,36 @@ public class ReviewFragment extends Fragment {
             binding.buttonValidate.setEnabled(false);
 
         } else {
-            binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.redButton)));
+            binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red)));
             binding.buttonValidate.setEnabled(true);
 
         }
     }
 
+    /**
+     * Creates a new Review instance using the user input from the form.
+     */
     private void createNewReview() {
-        // Recupere l'auteur de la nouvelle review
+        // Retrieves the author of the new review
         TextView tvNewReviewName = binding.tvNewReviewName;
         String author = tvNewReviewName.getText().toString();
-        // Recupere l'url de l'avatar de l'auteur de la nouvelle review
-        // --> Voir dans la méthode OnViewCreated
-        // Recupere la note de la nouvelle review
+        // Retrieves the rating of the new review
         RatingBar rbNewReviewRate = binding.rbNewReviewRate;
         float ratingFloat = rbNewReviewRate.getRating();
         int rating = (int) ratingFloat;
-        // Recupere le commentaire de la nouvelle review
+        // Retrieves the comment of the new review
         TextInputEditText tietNewReviewComent = binding.tietNewReviewComment;
         String content = Objects.requireNonNull(tietNewReviewComent.getText()).toString();
 
-        // Cree une nouvelle instance de l'objet à ajouter
+        // Creates a new instance of the object to be added
         newReview = new Review(author, avatarUrl, content, rating);
     }
 
+    /**
+     * Updates the UI with the provided list of reviews.
+     *
+     * @param reviews List of reviews to display in the RecyclerView
+     */
     private void updateUIWithReviews(List<Review> reviews) {
         Log.d("ReviewFragment", "Number of reviews: " + reviews.size());
         binding.fragmentReviewRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

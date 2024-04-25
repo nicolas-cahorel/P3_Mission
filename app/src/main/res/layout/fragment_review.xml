@@ -96,7 +96,7 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         android:visibility="visible"
-        app:chipBackgroundColor="@color/redButton"
+        app:chipBackgroundColor="@color/red"
         app:chipCornerRadius="10dp"
         app:chipStrokeColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

@@ -31,12 +31,22 @@ import dagger.hilt.android.HiltAndroidApp;
 public class TajMahalApplication extends Application {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
+
+    /**
+     * Called when the application is first created.
+     * Sets the application context to a static field for later use.
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
     }
 
+    /**
+     * Returns the application context.
+     *
+     * @return The application context.
+     */
     public static Context getAppContext() {
         return context;
     }

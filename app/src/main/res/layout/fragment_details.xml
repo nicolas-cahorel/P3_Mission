@@ -86,6 +86,7 @@
         </com.google.android.material.chip.ChipGroup>
 
         <!-- Start of modification: addition of elements to the GUI -->
+
         <TextView
             android:id="@+id/tvRestaurantRate"
             android:layout_width="wrap_content"
@@ -216,6 +217,7 @@
             app:layout_constraintTop_toTopOf="@+id/tvRestaurantTotalRatings" />
 
         <!-- End of modification: addition of elements to the GUI -->
+
         <View
             android:id="@+id/separator"
             android:layout_width="0dp"

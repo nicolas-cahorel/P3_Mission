@@ -46,10 +46,10 @@ public class AddReviewUnitTest {
     /**
      * Creates a new instance of a Review object with the given parameters.
      *
-     * @param author The author of the review
+     * @param author    The author of the review
      * @param avatarUrl The URL of the author's avatar
-     * @param content The content of the review
-     * @param rating The rating of the review
+     * @param content   The content of the review
+     * @param rating    The rating of the review
      * @return A new instance of a Review object
      */
     private Review createReview(String author, String avatarUrl, String content, Integer rating) {
@@ -63,7 +63,7 @@ public class AddReviewUnitTest {
     @Test
     public void newReviewFirst() {
         // Create a new review
-        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 1 );
+        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 1);
 
         // Add the review to the repository.
         reviewRepository.addReview(review);
@@ -86,7 +86,7 @@ public class AddReviewUnitTest {
     @Test
     public void newReviewAlreadyExist() {
         // Create a new review that already exists
-        Review review = createReview("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg", "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5 );
+        Review review = createReview("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg", "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5);
 
         // Add the review to the repository.
         reviewRepository.addReview(review);
@@ -99,7 +99,7 @@ public class AddReviewUnitTest {
 
         // The assert method will throw an AssertionError if the new review already exist in the list.
         for (int currentIndex = 1; currentIndex < reviews.size(); currentIndex++) {
-                assertNotEquals("The new review should be different than the existing reviews of the list", review, reviews.get(currentIndex));
+            assertNotEquals("The new review should be different than the existing reviews of the list", review, reviews.get(currentIndex));
         }
     }
 
@@ -109,7 +109,7 @@ public class AddReviewUnitTest {
     @Test
     public void newReviewCommentIsEmpty() {
         // Create a new review without content
-        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "", 1 );
+        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "", 1);
 
         // Add the review to the repository.
         reviewRepository.addReview(review);
@@ -131,7 +131,7 @@ public class AddReviewUnitTest {
     @Test
     public void newReviewRate_isLessThan1() {
         // Create a new review with rate = 0.
-        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 0 );
+        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 0);
 
         // Add the review to the repository.
         reviewRepository.addReview(review);
@@ -144,7 +144,7 @@ public class AddReviewUnitTest {
 
         // The assertEquals() method will throw an AssertionError if the review has been added.
         Review firstReview = reviews.get(0);
-        assertTrue("The rating should be 1  or greater for the new review to be added", firstReview.getRating()>=1);
+        assertTrue("The rating should be 1  or greater for the new review to be added", firstReview.getRating() >= 1);
     }
 
     /**
@@ -153,7 +153,7 @@ public class AddReviewUnitTest {
     @Test
     public void newReviewRate_isMoreThan5() {
         // Create a new review with rate = 6.
-        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 6 );
+        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 6);
 
         // Add the review to the repository.
         reviewRepository.addReview(review);
@@ -166,7 +166,7 @@ public class AddReviewUnitTest {
 
         // The assertEquals() method will throw an AssertionError if the review has been added.
         Review firstReview = reviews.get(0);
-        assertTrue("The rating should be 5 or lower for the new review to be added", firstReview.getRating()<=5);
+        assertTrue("The rating should be 5 or lower for the new review to be added", firstReview.getRating() <= 5);
     }
 
 }
