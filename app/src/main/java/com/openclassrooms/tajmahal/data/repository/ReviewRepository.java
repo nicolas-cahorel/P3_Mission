@@ -116,17 +116,32 @@ public class ReviewRepository {
                         liveDataReviews.setValue(this.localReviews);
                     } else {
                         Toast.makeText(context, context.getString(R.string.error_validate_add_rate), Toast.LENGTH_SHORT).show();
+                        // UNIT TEST : Uncomment the two following lines to check the validity of the test.
+                        //this.localReviews.add(0, review);
+                        //liveDataReviews.setValue(this.localReviews);
                     }
                 } else if (review.getRating() >= 1 && review.getRating() <= 5) {
                     Toast.makeText(context, context.getString(R.string.error_validate_add_comment), Toast.LENGTH_SHORT).show();
+                    // UNIT TEST : Uncomment the two following lines to check the validity of the test.
+                    //this.localReviews.add(0, review);
+                    //liveDataReviews.setValue(this.localReviews);
                 } else {
                     Toast.makeText(context, context.getString(R.string.error_validate_add_comment_rate), Toast.LENGTH_SHORT).show();
+                    // UNIT TEST : Uncomment the two following lines to check the validity of the test.
+                    //this.localReviews.add(0, review);
+                    //liveDataReviews.setValue(this.localReviews);
                 }
             } else {
                 Toast.makeText(context, context.getString(R.string.error_existing_review), Toast.LENGTH_SHORT).show();
+                // UNIT TEST newReviewAlreadyExist: Uncomment the two following lines to check the validity of the test.
+                //this.localReviews.add(0, review);
+                //liveDataReviews.setValue(this.localReviews);
             }
         } else {
             Toast.makeText(context, context.getString(R.string.error_review_list_is_empty), Toast.LENGTH_SHORT).show();
+            // UNIT TEST : Uncomment the two following lines to check the validity of the test.
+            //this.localReviews.add(0, review);
+            //liveDataReviews.setValue(this.localReviews);
         }
 
     }

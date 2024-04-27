@@ -1,7 +1,8 @@
 package com.openclassrooms.tajmahal;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.openclassrooms.tajmahal.data.repository.ReviewRepository;
@@ -25,7 +26,7 @@ import java.util.List;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = "src/main/AndroidManifest.xml")
+@Config(application = TajMahalApplication.class)
 public class AddReviewUnitTest {
     @Mock
     private RestaurantFakeApi api;
@@ -85,22 +86,24 @@ public class AddReviewUnitTest {
      */
     @Test
     public void newReviewAlreadyExist() {
-        // Create a new review that already exists
-        Review review = createReview("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg", "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5);
-
-        // Add the review to the repository.
-        reviewRepository.addReview(review);
-
         // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
         List<Review> reviews = reviewRepository.getReviews().getValue();
 
-        // The assert method will throw an AssertionError if the review list is null.
-        assert reviews != null;
+        // Verify that the review list is not null and not empty
+        assertNotNull("The review list should not be null", reviews);
+        assertFalse("The review list should not be empty", reviews.isEmpty());
 
-        // The assert method will throw an AssertionError if the new review already exist in the list.
-        for (int currentIndex = 1; currentIndex < reviews.size(); currentIndex++) {
-            assertNotEquals("The new review should be different than the existing reviews of the list", review, reviews.get(currentIndex));
-        }
+        // Create a new review that already exists in the list
+        Review existingReview = reviews.get(0);
+
+        // Add the existing review to the repository.
+        reviewRepository.addReview(existingReview);
+
+        // Update the list of reviews from the reviewRepository.
+        List<Review> updatedReviews = reviewRepository.getReviews().getValue();
+
+        // Verify that the size of the list has not changed because the existing review should not have been added again.
+        assertEquals("The new review should not have been added to the list because it already exists.", reviews.size(), updatedReviews.size());
     }
 
     /**
