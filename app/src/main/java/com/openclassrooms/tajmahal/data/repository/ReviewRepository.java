@@ -74,8 +74,13 @@ public class ReviewRepository {
      * @return LiveData holding the list of reviews.
      */
     public LiveData<List<Review>> getReviews() {
-        if (liveDataReviews.getValue() == null) {
-            liveDataReviews.setValue(this.localReviews);
+        liveDataReviews.setValue(this.localReviews);
+
+        // Calcul du nombre de critiques dans la liste
+        int numberOfReviews;
+        List<Review> reviewsTest = liveDataReviews.getValue();
+        if (reviewsTest != null) {
+            numberOfReviews = reviewsTest.size();
         }
         return liveDataReviews;
     }
@@ -132,7 +137,7 @@ public class ReviewRepository {
                     //liveDataReviews.setValue(this.localReviews);
                 }
             } else {
-                Toast.makeText(context, context.getString(R.string.error_existing_review), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, context.getString(R.string.error_existing_review), Toast.LENGTH_SHORT).show();
                 // UNIT TEST newReviewAlreadyExist: Uncomment the two following lines to check the validity of the test.
                 //this.localReviews.add(0, review);
                 //liveDataReviews.setValue(this.localReviews);

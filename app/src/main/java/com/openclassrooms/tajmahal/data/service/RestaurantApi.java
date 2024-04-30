@@ -48,4 +48,6 @@ public interface RestaurantApi {
      * @return The {@link List<Review>} object containing all the details of reviews.
      */
     List<Review> getReviews();
+
+
 }
