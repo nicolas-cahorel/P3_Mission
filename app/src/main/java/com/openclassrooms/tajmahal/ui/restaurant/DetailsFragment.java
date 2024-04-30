@@ -163,7 +163,7 @@ public class DetailsFragment extends Fragment {
      * @param totalRatings The totalRatings object containing details to be displayed.
      */
     private void updateUIWithTotalRatings(Integer totalRatings) {
-        binding.tvRestaurantTotalRatings.setText(String.valueOf(totalRatings));
+        binding.tvRestaurantTotalRatings.setText("(" + totalRatings + ")" );
     }
 
     /**

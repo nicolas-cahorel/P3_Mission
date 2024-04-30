@@ -91,63 +91,52 @@ public class ReviewRepository {
      * @param review The new review to be added to the list.
      */
     public void addReview(Review review) {
-
-        // Obtain a valid reference to the Context object for the display of the Toast
-        Context context = TajMahalApplication.getAppContext();
-
-        localReviews = liveDataReviews.getValue();
-
+        //localReviews = liveDataReviews.getValue();
 
         // Check if the localReviews list is not null
         if (localReviews != null) {
             // Check if the localReviews list contains the review
-            boolean reviewTest = false;
+            boolean reviewAlreadyExist = false;
             for (int i = 0; i < localReviews.size(); i++) {
                 if (review.equals(localReviews.get(i))) {
-                    reviewTest = true;
+                    reviewAlreadyExist = true;
                     break;
                 }
             }
 
             // Check if the local list does not contain the new review
-            if (!reviewTest) {
+            if (!reviewAlreadyExist) {
                 // Check if the new review contains a comment
                 if (!review.getContent().isEmpty()) {
                     // Check if the new reviews rate is between 1 and 5
                     if (review.getRating() >= 1 && review.getRating() <= 5) {
-                        // Add the new review to the top of the local list of reviews
+
+                        // Add the new review to the top of the local list of reviews and update the LiveData object with it.
                         this.localReviews.add(0, review);
-                        // Update the LiveData object with the new list of reviews
                         liveDataReviews.setValue(this.localReviews);
+
+                        // UNIT TEST newReviewFirst : Uncomment the two following lines and comment the two previous lines to check the validity of the test.
+                        //this.localReviews.add(review);
+                        //liveDataReviews.setValue(this.localReviews);
+
+
                     } else {
-                        Toast.makeText(context, context.getString(R.string.error_validate_add_rate), Toast.LENGTH_SHORT).show();
-                        // UNIT TEST : Uncomment the two following lines to check the validity of the test.
+                        // UNIT TESTS newReviewRateUnder1 / Over5 : Uncomment the two following lines to check the validity of the test.
                         //this.localReviews.add(0, review);
                         //liveDataReviews.setValue(this.localReviews);
                     }
-                } else if (review.getRating() >= 1 && review.getRating() <= 5) {
-                    Toast.makeText(context, context.getString(R.string.error_validate_add_comment), Toast.LENGTH_SHORT).show();
-                    // UNIT TEST : Uncomment the two following lines to check the validity of the test.
-                    //this.localReviews.add(0, review);
-                    //liveDataReviews.setValue(this.localReviews);
+
                 } else {
-                    Toast.makeText(context, context.getString(R.string.error_validate_add_comment_rate), Toast.LENGTH_SHORT).show();
-                    // UNIT TEST : Uncomment the two following lines to check the validity of the test.
+                    // UNIT TEST newReviewCommentIsEmpty : Uncomment the two following lines to check the validity of the test.
                     //this.localReviews.add(0, review);
                     //liveDataReviews.setValue(this.localReviews);
                 }
+
             } else {
-                //Toast.makeText(context, context.getString(R.string.error_existing_review), Toast.LENGTH_SHORT).show();
-                // UNIT TEST newReviewAlreadyExist: Uncomment the two following lines to check the validity of the test.
+                // UNIT TEST newAlreadyExist : Uncomment the two following lines to check the validity of the test.
                 //this.localReviews.add(0, review);
                 //liveDataReviews.setValue(this.localReviews);
             }
-        } else {
-            Toast.makeText(context, context.getString(R.string.error_review_list_is_empty), Toast.LENGTH_SHORT).show();
-            // UNIT TEST : Uncomment the two following lines to check the validity of the test.
-            //this.localReviews.add(0, review);
-            //liveDataReviews.setValue(this.localReviews);
         }
-
     }
 }

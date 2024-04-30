@@ -47,9 +47,6 @@ public class ReviewFragment extends Fragment {
     // ViewModel instance for handling the business logic related to this fragment
     private DetailsViewModel detailsViewModel;
 
-    // Represents a new review to be added
-    private Review newReview;
-
     // URL for the avatar image
     private String avatarUrl;
 
@@ -117,8 +114,7 @@ public class ReviewFragment extends Fragment {
         binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
 
         binding.buttonValidate.setOnClickListener(v -> {
-            createNewReview();
-            detailsViewModel.addReview(newReview);
+            detailsViewModel.addReview(createNewReview());
         });
 
         // Sets an OnClickListener for the back button. When clicked, it replaces the current fragment with the DetailsFragment
@@ -180,7 +176,7 @@ public class ReviewFragment extends Fragment {
     /**
      * Creates a new Review instance using the user input from the form.
      */
-    private void createNewReview() {
+    private Review createNewReview() {
         // Retrieves the author of the new review
         TextView tvNewReviewName = binding.tvNewReviewName;
         String author = tvNewReviewName.getText().toString();
@@ -193,7 +189,7 @@ public class ReviewFragment extends Fragment {
         String content = Objects.requireNonNull(tietNewReviewComent.getText()).toString();
 
         // Creates a new instance of the object to be added
-        newReview = new Review(author, avatarUrl, content, rating);
+        return new Review(author, avatarUrl, content, rating);
     }
 
     /**
