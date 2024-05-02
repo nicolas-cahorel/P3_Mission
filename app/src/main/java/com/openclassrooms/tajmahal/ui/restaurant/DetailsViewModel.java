@@ -64,7 +64,6 @@ public class DetailsViewModel extends ViewModel {
         return reviewRepository.getReviews();
     }
 
-
     /**
      * Retrieves the total number of ratings for the Taj Mahal restaurant.
      *
@@ -81,7 +80,6 @@ public class DetailsViewModel extends ViewModel {
         totalRatingsLiveData.setValue(totalRatings);
         return totalRatingsLiveData;
     }
-
 
     /**
      * Retrieves the rating count details for the Taj Mahal restaurant.
@@ -136,7 +134,6 @@ public class DetailsViewModel extends ViewModel {
         }
         return averageRatingLiveData;
     }
-
 
     /**
      * Retrieves the current day of the week in French.

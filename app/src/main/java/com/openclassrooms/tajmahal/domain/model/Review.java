@@ -19,10 +19,10 @@ import java.util.Objects;
  */
 public class Review {
     // Member variables representing attributes of a review.
-    private String author;
-    private String avatarUrl;
-    private String content;
-    private int rating;
+    private final String author;
+    private final String avatarUrl;
+    private final String content;
+    private final int rating;
 
     /**
      * Constructor for the review class.
@@ -49,31 +49,12 @@ public class Review {
     }
 
     /**
-     * Sets the author of the review.
-     *
-     * @param author The author of the review
-     */
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    /**
      * Returns the URL of the author's avatar.
      *
      * @return The URL of the author's avatar
      */
     public String getAvatarUrl() {
         return avatarUrl;
-    }
-
-
-    /**
-     * Sets the URL of the author's avatar.
-     *
-     * @param avatarUrl The URL of the author's avatar
-     */
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     /**
@@ -86,30 +67,12 @@ public class Review {
     }
 
     /**
-     * Sets the content of the review.
-     *
-     * @param content The content of the review
-     */
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    /**
      * Returns the rating of the review.
      *
      * @return The rating of the review
      */
     public int getRating() {
         return rating;
-    }
-
-    /**
-     * Sets the rating of the review.
-     *
-     * @param rating The rating of the review
-     */
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 
     /**

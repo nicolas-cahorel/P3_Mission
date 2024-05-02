@@ -1,5 +1,6 @@
 package com.openclassrooms.tajmahal.ui.restaurant;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -38,9 +39,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class DetailsFragment extends Fragment {
 
     private FragmentDetailsBinding binding;
-
     private DetailsViewModel detailsViewModel;
-
 
     /**
      * This method is called when the fragment is first created.
@@ -54,7 +53,6 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
     /**
      * Creates and returns the view hierarchy associated with the fragment.
      *
@@ -67,10 +65,10 @@ public class DetailsFragment extends Fragment {
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
-
-
-        return binding.getRoot(); // Returns the root view.
+        // Binds the layout using view binding
+        binding = FragmentDetailsBinding.inflate(inflater, container, false);
+        // Returns the root view
+        return binding.getRoot();
     }
 
     /**
@@ -84,12 +82,18 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupUI(); // Sets up user interface components.
-        setupViewModel(); // Prepares the ViewModel for the fragment.
-        detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
-        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings); // Observes changes in totalRatings and updates the UI accordingly.
-        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount); // Observes changes in ratingCount and updates the UI accordingly.
-        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating); // Observes changes in averageRating and updates the UI accordingly.
+        // Sets up user interface components
+        setupUI();
+        // Prepares the ViewModel for the fragment
+        setupViewModel();
+        // Observes changes in the restaurant data and updates the UI accordingly
+        detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
+        // Observes changes in totalRatings and updates the UI accordingly
+        detailsViewModel.getTajMahalTotalRatings().observe(requireActivity(), this::updateUIWithTotalRatings);
+        // Observes changes in ratingCount and updates the UI accordingly
+        detailsViewModel.getTajMahalRatingCount().observe(requireActivity(), this::updateUIWithRatingCount);
+        // Observes changes in averageRating and updates the UI accordingly
+        detailsViewModel.getTajMahalAverageRating().observe(requireActivity(), this::updateUIWithAverageRating);
 
         binding.buttonLeaveReview.setEnabled(true);
         binding.buttonLeaveReview.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +124,6 @@ public class DetailsFragment extends Fragment {
     private void setupViewModel() {
         detailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
     }
-
 
     /**
      * Sets up the UI-specific properties, such as system UI flags and status bar color.
@@ -156,14 +159,14 @@ public class DetailsFragment extends Fragment {
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
     }
 
-
     /**
      * Updates the UI components with the provided ratings data.
      *
      * @param totalRatings The totalRatings object containing details to be displayed.
      */
+    @SuppressLint("SetTextI18n")
     private void updateUIWithTotalRatings(Integer totalRatings) {
-        binding.tvRestaurantTotalRatings.setText("(" + totalRatings + ")" );
+        binding.tvRestaurantTotalRatings.setText("(" + totalRatings + ")");
     }
 
     /**
@@ -188,7 +191,6 @@ public class DetailsFragment extends Fragment {
         binding.tvRestaurantRate.setText(String.format(Locale.getDefault(), "%.1f", averageRating));
         binding.rbRestaurant.setRating(averageRating);
     }
-
 
     /**
      * Opens the provided address in Google Maps or shows an error if Google Maps
@@ -246,6 +248,5 @@ public class DetailsFragment extends Fragment {
     public static DetailsFragment newInstance() {
         return new DetailsFragment();
     }
-
 
 }

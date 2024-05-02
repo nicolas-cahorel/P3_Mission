@@ -96,11 +96,14 @@ public class ReviewFragment extends Fragment {
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // Calls the superclass' onViewCreated() method to ensure proper initialization and default behavior before performing specific operations in the current fragment.
+        // Calls the superclass' onViewCreated() method to ensure proper initialization and default behavior before performing specific operations in the current fragment
         super.onViewCreated(view, savedInstanceState);
-        setupViewModel(); // Prepares the ViewModel for the fragment.
-        setupUI(); // Sets up user interface components.
-        detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews); // Observes changes in the reviews data and updates the UI accordingly.
+        // Prepares the ViewModel for the fragment
+        setupViewModel();
+        // Sets up user interface components
+        setupUI();
+        // Observes changes in the reviews data and updates the UI accordingly
+        detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews);
         binding.tvRestaurantNameInReview.setText(getString(R.string.restaurant_name));
         binding.buttonBack.setEnabled(true);
         binding.tvNewReviewName.setText(getString(R.string.new_reviewers_name));
@@ -110,7 +113,6 @@ public class ReviewFragment extends Fragment {
                 .into(binding.ivNewReviewAvatar);
         binding.buttonValidate.setEnabled(true);
         binding.buttonValidate.setText(getString(R.string.button_validate));
-        // UNIT TESTS : comment the line below to run the unit tests
         binding.buttonValidate.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.grey)));
 
         binding.buttonValidate.setOnClickListener(v -> {
@@ -139,11 +141,9 @@ public class ReviewFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                // UNIT TESTS : comment the line below to run the unit tests
                 updateButtonState();
             }
         });
-        // UNIT TESTS : comment the line below to run the unit tests
         binding.rbNewReviewRate.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> updateButtonState());
 
     }

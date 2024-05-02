@@ -41,13 +41,4 @@ public class TajMahalApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
     }
-
-    /**
-     * Returns the application context.
-     *
-     * @return The application context.
-     */
-    public static Context getAppContext() {
-        return context;
-    }
 }

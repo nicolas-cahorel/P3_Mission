@@ -18,7 +18,7 @@ import java.util.List;
  * not contain any constructor. An interface is not a class. Writing an interface is similar to writing a class,
  * but they are two different concepts. A class describes the attributes and behaviors of an object.
  * An interface contains behaviors that a class implements.
- *
+ * </p>
  * <p>
  * Here, {@link RestaurantApi} provides a method to get details of a restaurant.
  * </p>

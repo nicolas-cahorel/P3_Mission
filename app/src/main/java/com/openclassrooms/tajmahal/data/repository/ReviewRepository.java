@@ -1,16 +1,10 @@
 package com.openclassrooms.tajmahal.data.repository;
 
 
-import android.content.Context;
-import android.widget.Toast;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.openclassrooms.tajmahal.R;
-import com.openclassrooms.tajmahal.TajMahalApplication;
 import com.openclassrooms.tajmahal.data.service.RestaurantApi;
-import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.ArrayList;
@@ -28,14 +22,14 @@ import javax.inject.Singleton;
  * This repository class manages the list of reviews for a restaurant, fetches the initial list of reviews from the provided {@link RestaurantApi},
  * and provides methods for adding new reviews to the list.
  *
- * @see Restaurant
+ * @see Review
  * @see RestaurantApi
  */
 @Singleton
 public class ReviewRepository {
 
     // The local list of reviews that will be used to store and manipulate review data.
-    private List<Review> localReviews;
+    private final List<Review> localReviews;
 
     // The MutableLiveData object that will be used to emit the updated list of reviews to the observers.
     private final MutableLiveData<List<Review>> liveDataReviews;
@@ -76,12 +70,7 @@ public class ReviewRepository {
     public LiveData<List<Review>> getReviews() {
         liveDataReviews.setValue(this.localReviews);
 
-        // Calcul du nombre de critiques dans la liste
-        int numberOfReviews;
-        List<Review> reviewsTest = liveDataReviews.getValue();
-        if (reviewsTest != null) {
-            numberOfReviews = reviewsTest.size();
-        }
+        // Set the value of liveDataReviews to the local list of reviews
         return liveDataReviews;
     }
 
@@ -91,10 +80,10 @@ public class ReviewRepository {
      * @param review The new review to be added to the list.
      */
     public void addReview(Review review) {
-        //localReviews = liveDataReviews.getValue();
 
         // Check if the localReviews list is not null
         if (localReviews != null) {
+
             // Check if the localReviews list contains the review
             boolean reviewAlreadyExist = false;
             for (int i = 0; i < localReviews.size(); i++) {
@@ -106,8 +95,10 @@ public class ReviewRepository {
 
             // Check if the local list does not contain the new review
             if (!reviewAlreadyExist) {
+
                 // Check if the new review contains a comment
                 if (!review.getContent().isEmpty()) {
+
                     // Check if the new reviews rate is between 1 and 5
                     if (review.getRating() >= 1 && review.getRating() <= 5) {
 
@@ -121,19 +112,22 @@ public class ReviewRepository {
 
 
                     } else {
+
                         // UNIT TESTS newReviewRateUnder1 / Over5 : Uncomment the two following lines to check the validity of the test.
                         //this.localReviews.add(0, review);
                         //liveDataReviews.setValue(this.localReviews);
                     }
 
                 } else {
+
                     // UNIT TEST newReviewCommentIsEmpty : Uncomment the two following lines to check the validity of the test.
                     //this.localReviews.add(0, review);
                     //liveDataReviews.setValue(this.localReviews);
                 }
 
             } else {
-                // UNIT TEST newAlreadyExist : Uncomment the two following lines to check the validity of the test.
+
+                // UNIT TEST newReviewAlreadyExist : Uncomment the two following lines to check the validity of the test.
                 //this.localReviews.add(0, review);
                 //liveDataReviews.setValue(this.localReviews);
             }

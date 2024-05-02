@@ -43,7 +43,7 @@ public class AddReviewUnitTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        //Créez une liste de Review pour le test
+        //Create a list of Review for the test
         List<Review> reviews = new ArrayList<>();
         reviews.add(new Review("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg", "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5));
         reviews.add(new Review("Martyna Siddeswara", "https://xsgames.co/randomusers/assets/avatars/female/31.jpg", "Un service excellent et des plats incroyablement savoureux. Nous sommes vraiment satisfaits de notre expérience au restaurant.", 4));
@@ -68,7 +68,6 @@ public class AddReviewUnitTest {
         return new Review(author, avatarUrl, content, rating);
     }
 
-
     /**
      * This method checks if a new review is correctly added at the beginning of the list.
      */
@@ -89,6 +88,8 @@ public class AddReviewUnitTest {
         // The assertEquals() method will throw an AssertionError if the review has not been added to the top of the list.
         assertEquals("The new review should be added at the beginning of the list", newReview, reviews.get(0));
 
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewFirst' was executed successfully.");
     }
 
 
@@ -117,6 +118,9 @@ public class AddReviewUnitTest {
                 break;
             }
         }
+
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewAlreadyExist' was executed successfully.");
     }
 
     /**
@@ -141,6 +145,9 @@ public class AddReviewUnitTest {
         if (content == null || content.isEmpty()) {
             fail("The new review without content should not be added");
         }
+
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewCommentIsEmpty' was executed successfully.");
     }
 
     /**
@@ -162,6 +169,9 @@ public class AddReviewUnitTest {
 
         // The assertEquals() method will throw an AssertionError if the review has been added.
         assertTrue("The rating should be 1 or greater for the new review to be added", reviews.get(0).getRating() >= 1);
+
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewRateUnder1' was executed successfully.");
     }
 
     /**
@@ -183,5 +193,8 @@ public class AddReviewUnitTest {
 
         // The assertEquals() method will throw an AssertionError if the review has been added.
         assertTrue("The rating should be 5 or lower for the new review to be added", reviews.get(0).getRating() <= 5);
+
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewRateOver5' was executed successfully.");
     }
 }
