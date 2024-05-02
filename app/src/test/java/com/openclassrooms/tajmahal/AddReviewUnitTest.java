@@ -3,6 +3,7 @@ package com.openclassrooms.tajmahal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.openclassrooms.tajmahal.data.repository.ReviewRepository;
 import com.openclassrooms.tajmahal.data.service.RestaurantFakeApi;
@@ -148,6 +149,33 @@ public class AddReviewUnitTest {
 
         // Print a message if the test is executed without errors
         System.out.println("The test 'newReviewCommentIsEmpty' was executed successfully.");
+    }
+
+    /**
+     * This method checks if the new review can be added without rate.
+     */
+    @Test
+    public void newReviewRateIsEmpty() {
+        // Create a new review without content
+        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.",null);
+
+        // Add the review to the repository.
+        reviewRepository.addReview(review);
+
+        // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
+        List<Review> reviews = reviewRepository.getReviews().getValue();
+
+        // The assertNotNull() method will throw an AssertionError if the review list is null.
+        assertNotNull(reviews);
+
+        // The assertEquals() method will throw an AssertionError if the review has been added.
+        String rate = String.valueOf(reviews.get(0).getRating());
+        if (rate.isEmpty()) {
+            fail("The new review without rate should not be added");
+        }
+
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewRateIsEmpty' was executed successfully.");
     }
 
     /**

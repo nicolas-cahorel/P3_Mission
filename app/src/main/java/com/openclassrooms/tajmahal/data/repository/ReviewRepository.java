@@ -113,7 +113,7 @@ public class ReviewRepository {
 
                     } else {
 
-                        // UNIT TESTS newReviewRateUnder1 / Over5 : Uncomment the two following lines to check the validity of the test.
+                        // UNIT TESTS newReviewRate Under1 / Over5 / IsEmpty : Uncomment the two following lines to check the validity of the test.
                         //this.localReviews.add(0, review);
                         //liveDataReviews.setValue(this.localReviews);
                     }
