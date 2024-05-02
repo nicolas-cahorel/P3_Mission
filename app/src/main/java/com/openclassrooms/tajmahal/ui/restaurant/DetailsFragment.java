@@ -133,10 +133,8 @@ public class DetailsFragment extends Fragment {
         window.getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
-        // Change the status bar color to white
-        window.setStatusBarColor(Color.WHITE);
-        // Use dark mode for the status bar text
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.setStatusBarColor(Color.TRANSPARENT);
+
         // Change the navigation bar color to white
         window.setNavigationBarColor(Color.WHITE);
     }
