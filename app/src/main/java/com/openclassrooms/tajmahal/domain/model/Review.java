@@ -59,7 +59,7 @@ public class Review {
      *
      * @return The rating of the review
      */
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
@@ -79,7 +79,7 @@ public class Review {
             return false;
         }
         Review other = (Review) obj;
-        return getRating() == other.getRating() &&
+        return Objects.equals(getRating(), other.getRating()) &&
                 Objects.equals(getAuthor(), other.getAuthor()) &&
                 Objects.equals(getAvatarUrl(), other.getAvatarUrl()) &&
                 Objects.equals(getContent(), other.getContent());

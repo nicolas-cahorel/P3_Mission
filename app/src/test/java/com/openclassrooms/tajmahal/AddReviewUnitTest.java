@@ -70,49 +70,24 @@ public class AddReviewUnitTest {
     }
 
     /**
-     * This method checks if a new review is correctly added at the beginning of the list.
-     */
-    @Test
-    public void newReviewFirst() {
-        // Create a new review
-        Review newReview = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 1);
-
-        // Add the review to the repository.
-        reviewRepository.addReview(newReview);
-
-        // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
-        List<Review> reviews = reviewRepository.getReviews().getValue();
-
-        // The assert method will throw an AssertionError if the review list is null.
-        assert reviews != null;
-
-        // The assertEquals() method will throw an AssertionError if the review has not been added to the top of the list.
-        assertEquals("The new review should be added at the beginning of the list", newReview, reviews.get(0));
-
-        // Print a message if the test is executed without errors
-        System.out.println("The test 'newReviewFirst' was executed successfully.");
-    }
-
-
-    /**
      * This method checks if a new review already exists in the list.
      */
     @Test
     public void newReviewAlreadyExist() {
 
-        // Create a new review
+        // Create a new review that already exist in the list
         Review newReview = createReview("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg", "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5);
 
-        // Add the existing review to the repository.
+        // Add the new review to the repository.
         reviewRepository.addReview(newReview);
 
         // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
         List<Review> reviews = reviewRepository.getReviews().getValue();
 
-        // The assert method will throw an AssertionError if the review list is null.
-        assert reviews != null;
+        // The assertNotNull() method will throw an AssertionError if the review list is null.
+        assertNotNull(reviews);
 
-        // Verify if the new review already exists in the list
+        // The fail() method will throw an AssertionError if the new review already exists in the list.
         for (int i = 1; i < Objects.requireNonNull(reviews).size(); i++) {
             if (reviews.get(0).equals(reviews.get(i))) {
                 fail("The new review already exist in the list, it should not have been added");
@@ -125,23 +100,49 @@ public class AddReviewUnitTest {
     }
 
     /**
+     * This method checks if a new review is correctly added at the beginning of the list.
+     */
+    @Test
+    public void newReviewFirst() {
+
+        // Create a random new review
+        Review newReview = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 1);
+
+        // Add the new review to the repository.
+        reviewRepository.addReview(newReview);
+
+        // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
+        List<Review> reviews = reviewRepository.getReviews().getValue();
+
+        // The assertNotNull() method will throw an AssertionError if the review list is null.
+        assertNotNull(reviews);
+
+        // The assertEquals() method will throw an AssertionError if the new review has not been added to the top of the list.
+        assertEquals("The new review should be added at the beginning of the list", newReview, reviews.get(0));
+
+        // Print a message if the test is executed without errors
+        System.out.println("The test 'newReviewFirst' was executed successfully.");
+    }
+
+    /**
      * This method checks if the new review can be added without comment.
      */
     @Test
     public void newReviewCommentIsEmpty() {
+
         // Create a new review without content
         Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "", 1);
 
-        // Add the review to the repository.
+        // Add the new review to the repository.
         reviewRepository.addReview(review);
 
         // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
         List<Review> reviews = reviewRepository.getReviews().getValue();
 
-        // The assert method will throw an AssertionError if the review list is null.
-        assert reviews != null;
+        // The assertNotNull() method will throw an AssertionError if the review list is null.
+        assertNotNull(reviews);
 
-        // The assertEquals() method will throw an AssertionError if the review has been added.
+        // The fail() method will throw an AssertionError if the new review has been added.
         String content = reviews.get(0).getContent();
         if (content == null || content.isEmpty()) {
             fail("The new review without content should not be added");
@@ -156,10 +157,11 @@ public class AddReviewUnitTest {
      */
     @Test
     public void newReviewRateIsEmpty() {
-        // Create a new review without content
-        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.",null);
 
-        // Add the review to the repository.
+        // Create a new review without rate
+        Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", null);
+
+        // Add the new review to the repository.
         reviewRepository.addReview(review);
 
         // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
@@ -168,9 +170,8 @@ public class AddReviewUnitTest {
         // The assertNotNull() method will throw an AssertionError if the review list is null.
         assertNotNull(reviews);
 
-        // The assertEquals() method will throw an AssertionError if the review has been added.
-        String rate = String.valueOf(reviews.get(0).getRating());
-        if (rate.isEmpty()) {
+        // The fail() method will throw an AssertionError if the new review has been added.
+        if (Objects.isNull(reviews.get(0).getRating())) {
             fail("The new review without rate should not be added");
         }
 
@@ -183,19 +184,20 @@ public class AddReviewUnitTest {
      */
     @Test
     public void newReviewRateUnder1() {
+
         // Create a new review with rate = 0.
         Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 0);
 
-        // Add the review to the repository.
+        // Add the new review to the repository.
         reviewRepository.addReview(review);
 
         // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
         List<Review> reviews = reviewRepository.getReviews().getValue();
 
-        // The assert method will throw an AssertionError if the review list is null.
-        assert reviews != null;
+        // The assertNotNull() method will throw an AssertionError if the review list is null.
+        assertNotNull(reviews);
 
-        // The assertEquals() method will throw an AssertionError if the review has been added.
+        // The assertTrue() method will throw an AssertionError if the new review has been added.
         assertTrue("The rating should be 1 or greater for the new review to be added", reviews.get(0).getRating() >= 1);
 
         // Print a message if the test is executed without errors
@@ -207,19 +209,20 @@ public class AddReviewUnitTest {
      */
     @Test
     public void newReviewRateOver5() {
+
         // Create a new review with rate = 6.
         Review review = createReview("John Tester", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "This is the content of the new review.", 6);
 
-        // Add the review to the repository.
+        // Add the new review to the repository.
         reviewRepository.addReview(review);
 
         // Retrieves the review objects from the reviewRepository and stores them in the reviews variable.
         List<Review> reviews = reviewRepository.getReviews().getValue();
 
-        // The assert method will throw an AssertionError if the review list is null.
-        assert reviews != null;
+        // The assertNotNull() method will throw an AssertionError if the review list is null.
+        assertNotNull(reviews);
 
-        // The assertEquals() method will throw an AssertionError if the review has been added.
+        // The assertTrue() method will throw an AssertionError if the new review has been added.
         assertTrue("The rating should be 5 or lower for the new review to be added", reviews.get(0).getRating() <= 5);
 
         // Print a message if the test is executed without errors

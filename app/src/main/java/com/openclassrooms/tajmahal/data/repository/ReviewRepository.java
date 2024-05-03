@@ -9,6 +9,7 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -77,20 +78,20 @@ public class ReviewRepository {
     /**
      * Adds a new review to the local list of reviews.
      *
-     * @param review The new review to be added to the list.
+     * @param reviewToAdd The new review to be added to the list.
      */
-    public void addReview(Review review) {
+    public void addReview(Review reviewToAdd) {
 
         // Check if the localReviews list is not null
         if (localReviews != null) {
 
-            // Check if the new reviews rate is not null
-            if (review.getRating() != null) {
+            // Check if the new review contains a rate
+            if (!Objects.isNull(reviewToAdd.getRating())) {
 
                 // Check if the localReviews list contains the review
                 boolean reviewAlreadyExist = false;
                 for (int i = 0; i < localReviews.size(); i++) {
-                    if (review.equals(localReviews.get(i))) {
+                    if (reviewToAdd.equals(localReviews.get(i))) {
                         reviewAlreadyExist = true;
                         break;
                     }
@@ -100,47 +101,48 @@ public class ReviewRepository {
                 if (!reviewAlreadyExist) {
 
                     // Check if the new review contains a comment
-                    if (!review.getContent().isEmpty()) {
+                    if (!reviewToAdd.getContent().isEmpty()) {
 
-                        // Check if the new reviews rate is between 1 and 5
-                        if (review.getRating() >= 1 && review.getRating() <= 5) {
+                        // Check if the new reviews rate is between 1 and 5 and not empty
+                        if (reviewToAdd.getRating() >= 1 && reviewToAdd.getRating() <= 5) {
 
                             // Add the new review to the top of the local list of reviews and update the LiveData object with it.
-                            this.localReviews.add(0, review);
+                            this.localReviews.add(0, reviewToAdd);
                             liveDataReviews.setValue(this.localReviews);
 
                             // UNIT TEST newReviewFirst : Uncomment the two following lines and comment the two previous lines to check the validity of the test.
-                            //this.localReviews.add(review);
+                            //this.localReviews.add(reviewToAdd);
                             //liveDataReviews.setValue(this.localReviews);
 
 
                         } else {
 
                             // UNIT TESTS newReviewRate Under1 / Over5 / IsEmpty : Uncomment the two following lines to check the validity of the test.
-                            //this.localReviews.add(0, review);
+                            //this.localReviews.add(0, reviewToAdd);
                             //liveDataReviews.setValue(this.localReviews);
                         }
 
                     } else {
 
                         // UNIT TEST newReviewCommentIsEmpty : Uncomment the two following lines to check the validity of the test.
-                        //this.localReviews.add(0, review);
+                        //this.localReviews.add(0, reviewToAdd);
                         //liveDataReviews.setValue(this.localReviews);
                     }
 
                 } else {
 
                     // UNIT TEST newReviewAlreadyExist : Uncomment the two following lines to check the validity of the test.
-                    //this.localReviews.add(0, review);
+                    //this.localReviews.add(0, reviewToAdd);
                     //liveDataReviews.setValue(this.localReviews);
                 }
 
             } else {
 
-                // UNIT TEST newReviewRateIsEmpty : Uncomment the two following lines to check the validity of the test.
-                //this.localReviews.add(0, review);
+                // UNIT TESTS newReviewRateIsEmpty : Uncomment the two following lines to check the validity of the test.
+                //this.localReviews.add(0, reviewToAdd);
                 //liveDataReviews.setValue(this.localReviews);
             }
+
         }
     }
 }
