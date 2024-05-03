@@ -1,17 +1,5 @@
 package com.openclassrooms.tajmahal.domain.model;
 
-/**
- * Represents a review and its various attributes.
- * <p>
- * This class models a review with its author, url of the author's avatar, content and rating
- * </p>
- * Example:
- * <pre>
- * Review Ranjit Singh = new Review("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg",
- * "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5);
- * </pre>
- */
-
 import java.util.Objects;
 
 /**
@@ -22,7 +10,7 @@ public class Review {
     private final String author;
     private final String avatarUrl;
     private final String content;
-    private final int rating;
+    private final Integer rating;
 
     /**
      * Constructor for the review class.
@@ -32,7 +20,7 @@ public class Review {
      * @param content   The content of the review
      * @param rating    The rating of the review, between 1 and 5
      */
-    public Review(String author, String avatarUrl, String content, int rating) {
+    public Review(String author, String avatarUrl, String content, Integer rating) {
         this.author = author;
         this.avatarUrl = avatarUrl;
         this.content = content;
