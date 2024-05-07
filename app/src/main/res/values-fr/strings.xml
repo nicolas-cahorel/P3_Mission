@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">TajMahal</string>
     <string name="restaurant">Restaurant</string>
     <string name="maps_not_installed">Google Maps n\'est pas installé.</string>
     <string name="phone_not_found">Aucune application pour passer des appels n\'a été trouvée.</string>
