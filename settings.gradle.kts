@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TajMahal"
+rootProject.name = "P3M_TajMahal"
 include(":app")

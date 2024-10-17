@@ -111,36 +111,36 @@ public class ReviewRepository {
                             liveDataReviews.setValue(this.localReviews);
 
                             // UNIT TEST newReviewFirst : Uncomment the two following lines and comment the two previous lines to check the validity of the test.
-                            //this.localReviews.add(reviewToAdd);
-                            //liveDataReviews.setValue(this.localReviews);
+                            this.localReviews.add(reviewToAdd);
+                            liveDataReviews.setValue(this.localReviews);
 
 
                         } else {
 
                             // UNIT TESTS newReviewRate Under1 / Over5 / IsEmpty : Uncomment the two following lines to check the validity of the test.
-                            //this.localReviews.add(0, reviewToAdd);
-                            //liveDataReviews.setValue(this.localReviews);
+                            this.localReviews.add(0, reviewToAdd);
+                            liveDataReviews.setValue(this.localReviews);
                         }
 
                     } else {
 
                         // UNIT TEST newReviewCommentIsEmpty : Uncomment the two following lines to check the validity of the test.
-                        //this.localReviews.add(0, reviewToAdd);
-                        //liveDataReviews.setValue(this.localReviews);
+                        this.localReviews.add(0, reviewToAdd);
+                        liveDataReviews.setValue(this.localReviews);
                     }
 
                 } else {
 
                     // UNIT TEST newReviewAlreadyExist : Uncomment the two following lines to check the validity of the test.
-                    //this.localReviews.add(0, reviewToAdd);
-                    //liveDataReviews.setValue(this.localReviews);
+                    this.localReviews.add(0, reviewToAdd);
+                    liveDataReviews.setValue(this.localReviews);
                 }
 
             } else {
 
                 // UNIT TESTS newReviewRateIsEmpty : Uncomment the two following lines to check the validity of the test.
-                //this.localReviews.add(0, reviewToAdd);
-                //liveDataReviews.setValue(this.localReviews);
+                this.localReviews.add(0, reviewToAdd);
+                liveDataReviews.setValue(this.localReviews);
             }
 
         }
